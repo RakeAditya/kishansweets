@@ -1,0 +1,73 @@
+.about-jumbotron {
+	text-align: center;
+	overflow: hidden;
+	position: relative;
+	background-color: #001f40;
+	border-radius: 0%;
+	height: calc(100vh - 62px);
+}
+
+.about-jumbotron-bg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	min-width: 100%;
+	object-fit: cover;
+	height: 100%;
+}
+
+.about-jumbotron-caption {
+	position: absolute;
+	z-index: 1;
+	top: 50%;
+	left: 50%;
+	margin-right: -50%;
+	transform: translate(-50%, -50%);
+}
+
+.about-jumbotron h2 {
+	margin-bottom: 0.8rem;
+}
+
+.about-arrow {
+	display: inline-block;
+	width: 50px;
+	height: 50px;
+	position: absolute;
+	bottom: -160px;
+	left: calc(50% - 25px);
+}
+
+.about-arrow .fa-angle-down {
+	line-height: 50px;
+	font-size: 4em !important;
+	transition: all 0.3s ease-in-out;
+}
+
+.about-history {
+	padding-top: 8rem;
+	padding-bottom: 8rem;
+}
+
+.about-history-title h3,
+.about-job-openings-title h3 {
+	font-family: 'Fredericka the Great', cursive;
+	margin-bottom: 1rem;
+	color: #007bff;
+	font-size: 1.8rem;
+}
+
+.about-history-title p,
+.about-job-openings-title p {
+	font-size: 2.8rem;
+}
+
+.about-horizontal-rule {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.about-job-openings {
+	padding-top: 8rem;
+	padding-bottom: 8rem;
+}
