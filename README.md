@@ -7,7 +7,7 @@ Complete Reactjs Resturant Website
 - CLone the repository
 
 ```bash
-git clone
+git clone https://github.com/RakeAditya/kishansweets.git
 ```
 
 - Navigate to directory
