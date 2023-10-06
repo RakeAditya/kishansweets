@@ -6,15 +6,16 @@
   border-radius: 0%;
   height: calc(100vh - 62px);
 }
+
 .about-jumbotron-bg {
   position: absolute;
   top: 0;
   left: 0;
   min-width: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   height: 100%;
 }
+
 .about-jumbotron-caption {
   position: absolute;
   z-index: 1;
@@ -23,6 +24,7 @@
   margin-right: -50%;
   transform: translate(-50%, -50%);
 }
+
 .about-jumbotron h2 {
   margin-bottom: 0.8rem;
 }
@@ -35,6 +37,7 @@
   bottom: -160px;
   left: calc(50% - 25px);
 }
+
 .about-arrow .fa-angle-down {
   line-height: 50px;
   font-size: 4em !important;
@@ -67,4 +70,4 @@
 .about-job-openings {
   padding-top: 8rem;
   padding-bottom: 8rem;
-}/*# sourceMappingURL=MainAbout.css.map */
+}
