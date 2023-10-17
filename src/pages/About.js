@@ -1,17 +1,16 @@
 import React from 'react';
 import Layout from './../components/Layout/Layout';
 import { Box, Typography } from '@mui/material';
-import back from '../images/kishan_backgroound.png';
+// import back from '../images/kishan_backgroound.png';
 const About = () => {
 	return (
 		<Layout>
 			<Box
 				sx={{
-					// border: '1px solid red',
-					backgroundImage: `url(${back})`,
+					background: 'linear-gradient(-45deg, #e73c7e, #23d5ab)',
 					textAlign: 'center',
 					color: 'white',
-					minHeight: '75vh',
+					minHeight: '73vh',
 					padding: '3rem 0',
 					'& h4': {
 						fontWeight: 'bold',
@@ -43,7 +42,7 @@ const About = () => {
 					},
 				}}
 			>
-				<Typography variant="h4">Welcome To My Resturant</Typography>
+				<Typography variant="h4">Welcome To My restaurent </Typography>
 				<p>
 					Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat quod, suscipit, aperiam totam autem culpa cum eveniet dolorum quasi est
 					perspiciatis laborum. Nam recusandae nihil quia odio voluptatibus facere omnis facilis rerum? Ab eum beatae nobis reiciendis, qui temporibus

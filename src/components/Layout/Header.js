@@ -20,7 +20,7 @@ const Header = () => {
 			<Divider />
 			<ul className="mobile-navigation">
 				<li>
-					<NavLink activeClassName="active" to={'/'}>
+					<NavLink activeclassname="active" to={'/'}>
 						Home
 					</NavLink>
 				</li>
@@ -28,13 +28,13 @@ const Header = () => {
 					{/* <a href="https://www.kishansweets.com/" rel="noopener noreferrer">
 						Menu
 					</a> */}
-					<NavLink to={'/menu'}>Menu</NavLink>
-				</li>
-				<li>
 					<NavLink to={'/about'}>About Us</NavLink>
 				</li>
 				<li>
-					<NavLink to={'/carrier'}>Carrier</NavLink>
+					<NavLink to={'/menu'}>Menu</NavLink>
+				</li>
+				<li>
+					<NavLink to={'/carrier'}>Vacancy</NavLink>
 				</li>
 				<li>
 					<NavLink to={'/contact'}>Contact</NavLink>
@@ -61,12 +61,12 @@ const Header = () => {
 								},
 							}}
 						>
-							<img src={Logo} alt="logo" height={'80'} width="100" style={{ margin: '5px 20px 5px 0' }} /> Kishan Sweets & Resturant
+							<img src={Logo} alt="logo" height={'70'} width="90" style={{ margin: '5px 20px 5px 0' }} /> Kishan Sweets & Restaurent
 						</Typography>
 						<Box sx={{ display: { xs: 'none', md: 'block' } }}>
 							<ul className="navigation-menu">
 								<li>
-									<NavLink activeClassName="active" to={'/'}>
+									<NavLink activeclassname="active" to={'/'}>
 										Home
 									</NavLink>
 								</li>
@@ -74,13 +74,13 @@ const Header = () => {
 									{/* <a href="https://www.kishansweets.com/" rel="noopener noreferrer">
 										Menu
 									</a> */}
+									<NavLink to={'/about'}>About</NavLink>
+								</li>
+								<li>
 									<NavLink to={'/menu'}>Menu</NavLink>
 								</li>
 								<li>
-									<NavLink to={'/about'}>About us</NavLink>
-								</li>
-								<li>
-									<NavLink to={'/carrier'}>Carrier</NavLink>
+									<NavLink to={'/carrier'}>Vacancy</NavLink>
 								</li>
 								<li>
 									<NavLink to={'/contact'}>Contact</NavLink>

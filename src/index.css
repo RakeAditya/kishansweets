@@ -27,3 +27,21 @@ body {
 .font-dance {
 	font-family: 'Dancing Script', cursive;
 }
+
+.styleLink {
+	color: white;
+	transition: 0.3s ease-in;
+}
+.styleLink:hover {
+	color: goldenrod;
+}
+
+/* spinner remove */
+input[type='number'] {
+	-moz-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+}

@@ -3,11 +3,19 @@ import { Box, Button, Typography } from '@mui/material';
 import chef1 from '../../images/chef2.jpg';
 const MainAbout = () => {
 	return (
-		<Box padding="4rem 0" display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-			<Typography variant="h4" sx={{ fontFamily: 'fantasy', letterSpacing: '1.4px' }}>
+		<Box
+			padding="4rem 0"
+			display="flex"
+			flexDirection="column"
+			justifyContent="center"
+			alignItems="center"
+			// border="1px solid red"
+			sx={{ background: 'linear-gradient(-45deg, #e73c7e, #23d5ab)' }}
+		>
+			<Typography variant="h4" color="white" sx={{ fontFamily: 'fantasy', letterSpacing: '1.4px' }}>
 				<span className="char">A</span>bout Us
 			</Typography>
-			<Typography variant="h3" sx={{ letterSpacing: '1px', fontWeight: '600', textAlign: 'center' }}>
+			<Typography variant="h3" color="white" sx={{ letterSpacing: '1px', fontWeight: '600', textAlign: 'center' }}>
 				Tradition <span className="char">&</span> Passion
 			</Typography>
 			<Box
@@ -57,48 +65,62 @@ const MainAbout = () => {
 						},
 					}}
 				>
-					<Typography variant="h4" className="font-dance " margin="2rem 0" textAlign="left" width="80%">
+					<Typography variant="h4" color="white" className="font-dance " margin="2rem 0" textAlign="left" width="80%">
 						<span className="char">W</span>ord from our Chef
 					</Typography>
-					<Typography variant="p" textAlign="left" margin="0 3.5rem">
+					<Typography variant="p" textAlign="left" color="white" margin="0 3.5rem">
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dolor neque, condimentum quis ante ac, imperdiet varius sapien. Maecenas
 						commodo ante et odio varius, at placerat mi tristique. Etiam et neque et magna finibus vestibulum. Lorem ipsum dolor sit amet, consectetur
 						adipiscing elit. Aliquam dolor neque, condimentum quis ante ac, imperdiet varius sapien. Maecenas commodo ante et odio varius, at placerat
 						mi tristique. Etiam et neque et magna finibus vestibulum.
 					</Typography>
-					<Typography variant="h4" textAlign="left" alignSelf="flex-start" margin="4rem 0 1rem 3.5rem">
-						Name ABC
-					</Typography>
+
 					<Box
+						// border="1px solid red"
 						width="80%"
-						display={'flex'}
-						alignItems={'center'}
-						justifyContent={'space-between'}
 						gap={2}
-						marginBottom={5}
+						// marginBottom={5}
+						marginTop={5}
 						sx={{
 							'@media (max-width:500px)': {
-								flexDirection: 'column',
-								alignItems: 'flex-start',
+								marginLeft: '1rem',
 							},
 						}}
 					>
-						<Typography variant="h5">
-							Chef <sapn className="char">&</sapn> Founder
+						<Typography variant="h4" textAlign="left" color="white" alignSelf="flex-start">
+							Name ABC
 						</Typography>
-						<Button
+						<Box
+							gap={2}
+							display={'flex'}
+							alignItems={'center'}
+							justifyContent={'space-between'}
+							marginTop={2}
 							sx={{
-								padding: '0.5rem',
-								border: '1px solid black',
-								color: 'black',
-								fontWeight: '700',
-								boxShadow: ' 0 0 10px rgba(0,0,0,0.4)',
-								'&:hover': { backgroundColor: 'goldenrod' },
-								transition: '0.2s ease-in',
+								'@media (max-width:400px)': {
+									flexDirection: 'column',
+									alignItems: 'flex-start',
+									// marginLeft: '1rem',
+								},
 							}}
 						>
-							Show more
-						</Button>
+							<Typography variant="h5" color="white">
+								Chef <span className="char">&</span> Founder
+							</Typography>
+							<Button
+								sx={{
+									padding: '0.5rem 1rem',
+									border: '1px solid black',
+									color: 'white',
+									fontWeight: '700',
+									boxShadow: ' 0 0 10px rgba(0,0,0,0.4)',
+									'&:hover': { backgroundColor: 'black' },
+									transition: '0.2s ease-in',
+								}}
+							>
+								Show more
+							</Button>
+						</Box>
 					</Box>
 				</Box>
 			</Box>
