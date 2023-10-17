@@ -1,12 +1,15 @@
 import React from 'react';
-import { Box, Button, TextField, Select, FormControl, InputLabel, MenuItem } from '@mui/material';
+import { Box, Button, TextField, Select, FormControl, InputLabel, MenuItem, Typography } from '@mui/material';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 // import { DateTimePicker } from '@mui'
-const EmailBox = ({ shift1, shift2, shift3 }) => {
+const EmailBox = ({ setPop, arr, val }) => {
 	const [state, setState] = React.useState(0);
+	const imageRef = React.useRef(null);
+	const [image, setImage] = React.useState(null);
+	console.log(image);
 	return (
 		<Box
 			// minHeight="650px"
@@ -26,16 +29,20 @@ const EmailBox = ({ shift1, shift2, shift3 }) => {
 				justifyContent={'space-between'}
 				alignItems={'center'}
 				gap={2}
+				// border={'1px solid red'}
 				sx={{ '@media (max-width:800px)': { flexDirection: 'column-reverse' } }}
 			>
 				<Box flex={2} sx={{ '@media (max-width:800px)': { width: '100%' } }}>
+					<Typography variant="h5" fontWeight="600" letterSpacing="1px" sx={{ '@media (max-width: 800px)': { textAlign: 'center' } }}>
+						Opening for - <span style={{ fontSize: '1.7rem', fontWeight: '800' }}>{arr[val - 1].post_name}</span>
+					</Typography>
 					<TextField
 						label="Full Name"
 						type="text"
 						variant="standard"
 						fullWidth
 						sx={{
-							marginTop: '2em',
+							marginTop: '1.5rem',
 							color: 'black',
 							'& .MuiInputBase-input': {
 								color: 'black',
@@ -81,7 +88,38 @@ const EmailBox = ({ shift1, shift2, shift3 }) => {
 					/>
 				</Box>
 				<Box flex={1}>
-					<Box width={'200px'} height={'180px'} border="1px solid black" bgcolor="rgba(0,0,0,0.5)"></Box>
+					<Box
+						onClick={() => imageRef.current.click()}
+						width={'200px'}
+						height={'200px'}
+						border="1px solid black"
+						bgcolor="rgba(0,0,0,0.5)"
+						display="flex"
+						justifyContent={'center'}
+						alignItems={'center'}
+						sx={{
+							cursor: 'pointer',
+							transition: '0.4s ease-in',
+							'&:hover ': {
+								bgcolor: 'rgba(0,0,0,0.4)',
+							},
+						}}
+					>
+						<input
+							type="file"
+							accept="image/*"
+							ref={imageRef}
+							hidden
+							onChange={(e) => {
+								setImage(e.target.files[0]);
+							}}
+						/>
+						{image ? (
+							<img src={URL.createObjectURL(image)} alt="" height="200px" width="200px" style={{ objectFit: 'cover' }} />
+						) : (
+							<p>drop image here</p>
+						)}
+					</Box>
 				</Box>
 			</Box>
 			{/* contact box */}
@@ -246,9 +284,9 @@ const EmailBox = ({ shift1, shift2, shift3 }) => {
 				<FormControl fullWidth sx={{ flex: 1 }}>
 					<InputLabel id="demo-simple-select-label">State</InputLabel>
 					<Select labelId="demo-simple-select-label" label="State" value={state} onChange={(e) => setState(e.target.value)}>
-						{shift1 && <MenuItem value={shift1}>{shift1}</MenuItem>}
-						{shift2 && <MenuItem value={shift2}>{shift2}</MenuItem>}
-						{shift3 && <MenuItem value={shift3}>{shift3}</MenuItem>}
+						<MenuItem value={arr[val - 1].shift1}>{arr[val - 1].shift1}</MenuItem>
+						<MenuItem value={arr[val - 1].shift2}>{arr[val - 1].shift2}</MenuItem>
+						<MenuItem value={arr[val - 1].shift3}>{arr[val - 1].shift3}</MenuItem>
 					</Select>
 				</FormControl>
 				{/* experience */}
@@ -370,6 +408,7 @@ const EmailBox = ({ shift1, shift2, shift3 }) => {
 							color: 'rgb(166, 166, 166)',
 						},
 					}}
+					onClick={() => setPop((pre) => !pre)}
 				>
 					Go Back
 				</Button>

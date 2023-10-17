@@ -7,7 +7,7 @@ import EmailBox from '../components/Layout/EmailBox';
 const Carrier = () => {
 	const [cardData, setCardData] = React.useState(null);
 	const [pop, setPop] = React.useState(false);
-
+	const [val, setVal] = React.useState(-1);
 	React.useEffect(() => {
 		const getCardData = async () => {
 			try {
@@ -16,6 +16,7 @@ const Carrier = () => {
 				const resp = await axios.post('https://kishansweets.com/apiweb/Vacancy.aspx', formData);
 				const data = resp.data;
 				setCardData(data.vacancylist);
+				console.log('rendereing');
 			} catch (error) {
 				console.error(error.message);
 			}
@@ -39,7 +40,7 @@ const Carrier = () => {
 				>
 					{pop ? (
 						<Box>
-							<EmailBox />
+							<EmailBox setPop={setPop} arr={cardData} val={val} />
 						</Box>
 					) : (
 						<>
@@ -89,6 +90,7 @@ const Carrier = () => {
 									{cardData.map((itm, index) => (
 										<Box display="flex" minWidth="min(420px,100%)" justifyContent="center" key={index}>
 											<Card
+												keyId={itm.post_id}
 												post_name={itm.post_name}
 												pgender={itm.pgender}
 												exp={itm.exp}
@@ -96,6 +98,8 @@ const Carrier = () => {
 												shft2={itm.shift2}
 												shft3={itm.shift3}
 												extra_req={itm.extra_req}
+												setPop={setPop}
+												setVal={setVal}
 											/>
 										</Box>
 									))}

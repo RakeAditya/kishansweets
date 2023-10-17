@@ -1,7 +1,7 @@
 import { Box, Button, Typography } from '@mui/material';
 import React from 'react';
 
-const Card = ({ post_name, pgender, exp, shft1, shft2, shft3, extra_req }) => {
+const Card = ({ post_name, pgender, exp, shft1, shft2, shft3, extra_req, setPop, keyId, setVal }) => {
 	return (
 		<Box
 			minHeight="400px"
@@ -54,6 +54,10 @@ const Card = ({ post_name, pgender, exp, shft1, shft2, shft3, extra_req }) => {
 						color: 'white',
 						bgcolor: 'rgba(0,0,0,0.6)',
 					},
+				}}
+				onClick={() => {
+					setVal(keyId);
+					setPop((pre) => !pre);
 				}}
 			>
 				Apply Now

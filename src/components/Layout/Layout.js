@@ -11,7 +11,7 @@ const Layout = ({ children }) => {
 		<>
 			<Header />
 			{currPath !== '/' && (
-				<Box marginTop="1rem" height="50vh" minWidth={'350px'}>
+				<Box marginTop="1rem" height="50vh" minWidth={'350px'} sx={{ objectFit: 'cover' }}>
 					<img src={front} alt="back" height="100%" width="100%" style={{ objectFit: 'cover' }} />
 				</Box>
 			)}
