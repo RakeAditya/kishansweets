@@ -1,9 +1,9 @@
 import React from 'react';
-import { Box, Button, TextField, Select, FormControl, InputLabel, MenuItem, Typography } from '@mui/material';
+import { Box, Button, TextField, Select, FormControl, InputLabel, MenuItem, Typography, IconButton } from '@mui/material';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 // import { DateTimePicker } from '@mui'
 const EmailBox = ({ setPop, arr, val }) => {
 	const [state, setState] = React.useState(0);
@@ -117,7 +117,9 @@ const EmailBox = ({ setPop, arr, val }) => {
 						{image ? (
 							<img src={URL.createObjectURL(image)} alt="" height="200px" width="200px" style={{ objectFit: 'cover' }} />
 						) : (
-							<p>drop image here</p>
+							<IconButton sx={{ '&:hover': { bgcolor: 'transparent' } }}>
+								<CloudUploadIcon sx={{ width: '50px', height: '50px' }} />
+							</IconButton>
 						)}
 					</Box>
 				</Box>
@@ -281,17 +283,19 @@ const EmailBox = ({ setPop, arr, val }) => {
 				sx={{ marginTop: '2rem', '@media (max-width:800px)': { flexDirection: 'column' } }}
 			>
 				{/* shift change */}
-				<FormControl fullWidth sx={{ flex: 1 }}>
-					<InputLabel id="demo-simple-select-label">State</InputLabel>
-					<Select labelId="demo-simple-select-label" label="State" value={state} onChange={(e) => setState(e.target.value)}>
+				<FormControl variant="standard" fullWidth sx={{ flex: 1 }}>
+					<InputLabel id="demo-simple-select-label" sx={{ fontSize: '1.2rem', fontWeight: '700', letterSpacing: '1px' }}>
+						Shift Select
+					</InputLabel>
+					<Select labelId="demo-simple-select-label" label="Shift Select" value={state} onChange={(e) => setState(e.target.value)}>
 						<MenuItem value={arr[val - 1].shift1}>{arr[val - 1].shift1}</MenuItem>
 						<MenuItem value={arr[val - 1].shift2}>{arr[val - 1].shift2}</MenuItem>
 						<MenuItem value={arr[val - 1].shift3}>{arr[val - 1].shift3}</MenuItem>
 					</Select>
 				</FormControl>
 				{/* experience */}
-				<FormControl fullWidth sx={{ flex: 1 }}>
-					<InputLabel>Work Experience</InputLabel>
+				<FormControl variant="standard" fullWidth sx={{ flex: 1 }}>
+					<InputLabel sx={{ fontSize: '1.2rem', fontWeight: '700', letterSpacing: '1px' }}>Work Experience</InputLabel>
 					<Select label="State" value={state} onChange={(e) => setState(e.target.value)}>
 						<MenuItem value={0}>No Experience</MenuItem>
 						<MenuItem value={1}>1</MenuItem>
@@ -317,8 +321,8 @@ const EmailBox = ({ setPop, arr, val }) => {
 				sx={{ marginTop: '2rem', '@media (max-width:800px)': { flexDirection: 'column' } }}
 			>
 				{/* shift change */}
-				<FormControl fullWidth sx={{ flex: 1 }}>
-					<InputLabel>Qualifications</InputLabel>
+				<FormControl variant="standard" fullWidth sx={{ flex: 1 }}>
+					<InputLabel sx={{ fontSize: '1.2rem', fontWeight: '700', letterSpacing: '1px' }}>Qualifications</InputLabel>
 					<Select label="State" value={state} onChange={(e) => setState(e.target.value)}>
 						<MenuItem value={10}>High School</MenuItem>
 						<MenuItem value={10}>Diploma</MenuItem>
