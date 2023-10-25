@@ -34,7 +34,6 @@ const Carrier = () => {
 						flexDirection: 'column',
 						justifyContent: 'center',
 						alignItems: 'center',
-						border: '1px solid red',
 						minHeight: '100vh',
 					}}
 				>

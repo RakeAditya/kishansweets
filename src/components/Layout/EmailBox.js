@@ -1,15 +1,92 @@
 import React from 'react';
-import { Box, Button, TextField, Select, FormControl, InputLabel, MenuItem, Typography, IconButton } from '@mui/material';
+import { Box, Button, TextField, Select, FormControl, InputLabel, MenuItem, Typography } from '@mui/material';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import axios from 'axios';
+import avatar from './../../images/avatar.png';
 // import { DateTimePicker } from '@mui'
 const EmailBox = ({ setPop, arr, val }) => {
-	const [state, setState] = React.useState(0);
 	const imageRef = React.useRef(null);
+	// form sates
 	const [image, setImage] = React.useState(null);
-	console.log(image);
+	const [name, setName] = React.useState('');
+	const [fname, setFname] = React.useState('');
+	const [mob, setMob] = React.useState('');
+	const [amob, setAmob] = React.useState('');
+	const [gender, setGender] = React.useState('');
+	const [selectedDate, setSelectedDate] = React.useState(null);
+	const [adhNum, setAdhNum] = React.useState('');
+	const [cadd, setCadd] = React.useState('');
+	const [refName, setRefName] = React.useState('');
+	const [refNum, setRefNum] = React.useState('');
+	const [refAdd, setRefAdd] = React.useState('');
+	// dropdown states
+	const [shift, setShift] = React.useState('');
+	const [exp, setExp] = React.useState('');
+	const [qual, setQaul] = React.useState('');
+	const [sal, setSal] = React.useState(0);
+	// submit FOrm
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		try {
+			const data = await handleImage();
+			if (data == 500) return alert('Please input an mage');
+			console.log('all good');
+
+			// const formData = new FormData();
+			// formData.append('api', 'sdgfwp49f4923d3287slhgw');
+			// formData.append('postid', val - 1);
+			// formData.append('cname', name);
+			// formData.append('fname', fname);
+			// // date selection
+			// const dob = `${selectedDate.$D}/${selectedDate.$M + 1}/${selectedDate.$y}`;
+			// formData.append('dob', dob);
+			// formData.append('mob', mob);
+			// formData.append('alt_mob', amob);
+			// formData.append('gen', gender);
+			// formData.append('aadhar', adhNum);
+			// formData.append('refname', refName);
+			// formData.append('cadd', cadd);
+			// formData.append('shift', shift);
+			// formData.append('exp_dur', exp);
+			// formData.append('quali', qual);
+			// formData.append('exp_sal', sal);
+			// formData.append('refmob', refNum);
+			// formData.append('refadd', refAdd);
+			// // done
+			// formData.forEach((ele) => console.log(ele));
+			// const resp = await axios.post('https://kishansweets.com/apiweb/app_details.aspx', formData);
+			// console.log(resp.data);
+			// if (resp.data.status === 200) setPop((pre) => !pre);
+		} catch (error) {
+			if (error) throw error;
+		}
+	};
+	const handleImage = async () => {
+		try {
+			if (image === '') throw new Error(500);
+			const formData = new FormData();
+			const img = image.slice(23);
+			formData.append('api', 'sdgfwp49f4923d3287slhgw');
+			formData.append('img', img);
+			const resp = await axios.post('https://kishansweets.com/apiweb/upload_app_photo.aspx', formData);
+			return resp.status;
+		} catch (error) {
+			if (error) return 500;
+		}
+	};
+	// handle base 64 format
+	const convertToBase64 = (file) => {
+		const reader = new FileReader();
+		reader.readAsDataURL(file);
+		reader.onload = () => {
+			console.log('called: ', reader);
+			setImage(reader.result);
+		};
+	};
+
 	return (
 		<Box
 			// minHeight="650px"
@@ -60,6 +137,8 @@ const EmailBox = ({ setPop, arr, val }) => {
 								borderBottomColor: 'black',
 							},
 						}}
+						value={name}
+						onChange={(e) => setName(e.target.value)}
 					/>
 					<TextField
 						label="Father's Name"
@@ -85,6 +164,8 @@ const EmailBox = ({ setPop, arr, val }) => {
 								borderBottomColor: 'black',
 							},
 						}}
+						value={fname}
+						onChange={(e) => setFname(e.target.value)}
 					/>
 				</Box>
 				<Box flex={1}>
@@ -111,15 +192,13 @@ const EmailBox = ({ setPop, arr, val }) => {
 							ref={imageRef}
 							hidden
 							onChange={(e) => {
-								setImage(e.target.files[0]);
+								convertToBase64(e.target.files[0]);
 							}}
 						/>
 						{image ? (
-							<img src={URL.createObjectURL(image)} alt="" height="200px" width="200px" style={{ objectFit: 'cover' }} />
+							<img src={image} alt="" height="200px" width="200px" style={{ objectFit: 'cover' }} />
 						) : (
-							<IconButton sx={{ '&:hover': { bgcolor: 'transparent' } }}>
-								<CloudUploadIcon sx={{ width: '50px', height: '50px' }} />
-							</IconButton>
+							<img src={avatar} alt="" height="100px" width="100px" style={{ objectFit: 'cover' }} />
 						)}
 					</Box>
 				</Box>
@@ -133,7 +212,7 @@ const EmailBox = ({ setPop, arr, val }) => {
 				sx={{ '@media (max-width:800px)': { flexDirection: 'column' } }}
 			>
 				<TextField
-					label="Contact No"
+					label="Mobile Number"
 					type="number"
 					variant="standard"
 					fullWidth
@@ -157,9 +236,12 @@ const EmailBox = ({ setPop, arr, val }) => {
 							borderBottomColor: 'black',
 						},
 					}}
+					value={mob}
+					onChange={(e) => setMob(e.target.value)}
+					required
 				/>
 				<TextField
-					label="Alternate No"
+					label="Alternate Mobile Number"
 					type="number"
 					variant="standard"
 					fullWidth
@@ -184,6 +266,8 @@ const EmailBox = ({ setPop, arr, val }) => {
 							borderBottomColor: 'black',
 						},
 					}}
+					value={amob}
+					onChange={(e) => setAmob(e.target.value)}
 				/>
 			</Box>
 			{/* Date field */}
@@ -195,61 +279,57 @@ const EmailBox = ({ setPop, arr, val }) => {
 				sx={{ '@media (max-width:800px)': { flexDirection: 'column' } }}
 			>
 				<LocalizationProvider dateAdapter={AdapterDayjs}>
-					<DatePicker label="DOB" sx={{ marginTop: '2rem', width: '100%', flex: 1 }} />
-					<TextField
-						label="Aadhar Number"
-						type="number"
-						variant="standard"
-						fullWidth
-						sx={{
-							flex: 1,
-							// marginTop: '1em',
-							color: 'black',
-							'& .MuiInputBase-input': {
-								color: 'black',
-							},
-							'& .MuiInput-underline:after': {
-								borderBottomColor: 'black',
-							},
-							'& .MuiInputLabel-root': {
-								color: 'black',
-							},
-							'&:hover .MuiInput-underline:before': {
-								borderBottomColor: 'black',
-							},
-							'&:focus .MuiInput-underline:before': {
-								borderBottomColor: 'black',
-							},
-						}}
-					/>
+					<DemoContainer components={['DatePicker']}>
+						<DatePicker label="Basic date picker" format="DD/MM/YY" value={selectedDate} onChange={setSelectedDate} />
+					</DemoContainer>
 				</LocalizationProvider>
+				<FormControl variant="standard" fullWidth sx={{ flex: 1 }}>
+					<InputLabel sx={{ fontSize: '1.2rem', fontWeight: '700', letterSpacing: '1px' }}>Gender</InputLabel>
+					<Select label="Gender" value={gender} onChange={(e) => setGender(e.target.value)}>
+						<MenuItem value="male">Male</MenuItem>
+						<MenuItem value="female">Female</MenuItem>
+						<MenuItem value="other">Other</MenuItem>
+					</Select>
+				</FormControl>
 			</Box>
 			{/* Reference name */}
-			<TextField
-				label="Reference Name"
-				type="text"
-				variant="standard"
-				fullWidth
-				sx={{
-					marginTop: '2em',
-					color: 'black',
-					'& .MuiInputBase-input': {
+			<Box
+				display={'flex'}
+				justifyContent={'space-between'}
+				alignItems={'center'}
+				gap={2}
+				sx={{ '@media (max-width:800px)': { flexDirection: 'column' } }}
+			>
+				<TextField
+					label="Aadhar Number"
+					type="number"
+					variant="standard"
+					fullWidth
+					sx={{
+						flex: 1,
+						marginTop: '1em',
 						color: 'black',
-					},
-					'& .MuiInput-underline:after': {
-						borderBottomColor: 'black',
-					},
-					'& .MuiInputLabel-root': {
-						color: 'black',
-					},
-					'&:hover .MuiInput-underline:before': {
-						borderBottomColor: 'black',
-					},
-					'&:focus .MuiInput-underline:before': {
-						borderBottomColor: 'black',
-					},
-				}}
-			/>
+						'& .MuiInputBase-input': {
+							color: 'black',
+						},
+						'& .MuiInput-underline:after': {
+							borderBottomColor: 'black',
+						},
+						'& .MuiInputLabel-root': {
+							color: 'black',
+						},
+						'&:hover .MuiInput-underline:before': {
+							borderBottomColor: 'black',
+						},
+						'&:focus .MuiInput-underline:before': {
+							borderBottomColor: 'black',
+						},
+					}}
+					value={adhNum}
+					onChange={(e) => setAdhNum(e.target.value)}
+				/>
+			</Box>
+
 			{/* Address */}
 			<TextField
 				label="Address"
@@ -275,6 +355,8 @@ const EmailBox = ({ setPop, arr, val }) => {
 						borderBottomColor: 'black',
 					},
 				}}
+				value={cadd}
+				onChange={(e) => setCadd(e.target.value)}
 			/>
 			<Box
 				display={'flex'}
@@ -287,7 +369,7 @@ const EmailBox = ({ setPop, arr, val }) => {
 					<InputLabel id="demo-simple-select-label" sx={{ fontSize: '1.2rem', fontWeight: '700', letterSpacing: '1px' }}>
 						Shift Select
 					</InputLabel>
-					<Select labelId="demo-simple-select-label" label="Shift Select" value={state} onChange={(e) => setState(e.target.value)}>
+					<Select labelId="demo-simple-select-label" label="Shift Select" value={shift} onChange={(e) => setShift(e.target.value)}>
 						<MenuItem value={arr[val - 1].shift1}>{arr[val - 1].shift1}</MenuItem>
 						<MenuItem value={arr[val - 1].shift2}>{arr[val - 1].shift2}</MenuItem>
 						<MenuItem value={arr[val - 1].shift3}>{arr[val - 1].shift3}</MenuItem>
@@ -296,18 +378,13 @@ const EmailBox = ({ setPop, arr, val }) => {
 				{/* experience */}
 				<FormControl variant="standard" fullWidth sx={{ flex: 1 }}>
 					<InputLabel sx={{ fontSize: '1.2rem', fontWeight: '700', letterSpacing: '1px' }}>Work Experience</InputLabel>
-					<Select label="State" value={state} onChange={(e) => setState(e.target.value)}>
+					<Select label="State" value={exp} onChange={(e) => setExp(e.target.value)}>
 						<MenuItem value={0}>No Experience</MenuItem>
-						<MenuItem value={1}>1</MenuItem>
-						<MenuItem value={2}>2</MenuItem>
-						<MenuItem value={3}>3</MenuItem>
-						<MenuItem value={4}>4</MenuItem>
-						<MenuItem value={5}>5</MenuItem>
-						<MenuItem value={6}>6</MenuItem>
-						<MenuItem value={7}>7</MenuItem>
-						<MenuItem value={8}>8</MenuItem>
-						<MenuItem value={9}>9</MenuItem>
-						<MenuItem value={10}>10</MenuItem>
+						<MenuItem value={1}>1 years</MenuItem>
+						<MenuItem value={2}>2 years</MenuItem>
+						<MenuItem value={3}>3 years</MenuItem>
+						<MenuItem value={4}> years</MenuItem>
+						<MenuItem value={5}>5 years</MenuItem>
 					</Select>
 				</FormControl>
 			</Box>
@@ -323,11 +400,11 @@ const EmailBox = ({ setPop, arr, val }) => {
 				{/* shift change */}
 				<FormControl variant="standard" fullWidth sx={{ flex: 1 }}>
 					<InputLabel sx={{ fontSize: '1.2rem', fontWeight: '700', letterSpacing: '1px' }}>Qualifications</InputLabel>
-					<Select label="State" value={state} onChange={(e) => setState(e.target.value)}>
-						<MenuItem value={10}>High School</MenuItem>
-						<MenuItem value={10}>Diploma</MenuItem>
-						<MenuItem value={20}>Graduate</MenuItem>
-						<MenuItem value={30}>Post Graduate</MenuItem>
+					<Select label="State" value={qual} onChange={(e) => setQaul(e.target.value)}>
+						<MenuItem value="high school">High School</MenuItem>
+						<MenuItem value="intermediate">Intermediate</MenuItem>
+						<MenuItem value="graduate">Graduate</MenuItem>
+						<MenuItem value="post graduate">Post Graduate</MenuItem>
 					</Select>
 				</FormControl>
 				{/* Expected Salary */}
@@ -336,6 +413,8 @@ const EmailBox = ({ setPop, arr, val }) => {
 					type="number"
 					variant="standard"
 					fullWidth
+					value={sal}
+					onChange={(e) => setSal(e.target.value)}
 					sx={{
 						flex: 1,
 						color: 'black',
@@ -357,6 +436,99 @@ const EmailBox = ({ setPop, arr, val }) => {
 					}}
 				/>
 			</Box>
+			<Box
+				display={'flex'}
+				justifyContent={'space-between'}
+				alignItems={'center'}
+				gap={2}
+				sx={{ '@media (max-width:800px)': { flexDirection: 'column' } }}
+			>
+				<TextField
+					label="Reference Name"
+					type="text"
+					variant="standard"
+					fullWidth
+					sx={{
+						flex: 1,
+						marginTop: '1em',
+						color: 'black',
+						'& .MuiInputBase-input': {
+							color: 'black',
+						},
+						'& .MuiInput-underline:after': {
+							borderBottomColor: 'black',
+						},
+						'& .MuiInputLabel-root': {
+							color: 'black',
+						},
+						'&:hover .MuiInput-underline:before': {
+							borderBottomColor: 'black',
+						},
+						'&:focus .MuiInput-underline:before': {
+							borderBottomColor: 'black',
+						},
+					}}
+					value={refName}
+					onChange={(e) => setRefName(e.target.value)}
+				/>
+				<TextField
+					label="Reference Mobile Number"
+					type="number"
+					variant="standard"
+					fullWidth
+					sx={{
+						// border: '1px solid red',
+						flex: 1,
+						marginTop: '1em',
+						color: 'black',
+						'& .MuiInputBase-input': {
+							color: 'black',
+						},
+						'& .MuiInput-underline:after': {
+							borderBottomColor: 'black',
+						},
+						'& .MuiInputLabel-root': {
+							color: 'black',
+						},
+						'&:hover .MuiInput-underline:before': {
+							borderBottomColor: 'black',
+						},
+						'&:focus .MuiInput-underline:before': {
+							borderBottomColor: 'black',
+						},
+					}}
+					value={refNum}
+					onChange={(e) => setRefNum(e.target.value)}
+				/>
+			</Box>
+			<TextField
+				label="Reference Person Address"
+				type="text"
+				variant="standard"
+				fullWidth
+				sx={{
+					flex: 1,
+					marginTop: '1em',
+					color: 'black',
+					'& .MuiInputBase-input': {
+						color: 'black',
+					},
+					'& .MuiInput-underline:after': {
+						borderBottomColor: 'black',
+					},
+					'& .MuiInputLabel-root': {
+						color: 'black',
+					},
+					'&:hover .MuiInput-underline:before': {
+						borderBottomColor: 'black',
+					},
+					'&:focus .MuiInput-underline:before': {
+						borderBottomColor: 'black',
+					},
+				}}
+				value={refAdd}
+				onChange={(e) => setRefAdd(e.target.value)}
+			/>
 			{/* button box */}
 			<Box
 				display={'flex'}
@@ -389,8 +561,9 @@ const EmailBox = ({ setPop, arr, val }) => {
 							color: 'rgb(166, 166, 166)',
 						},
 					}}
+					onClick={handleSubmit}
 				>
-					Apply Now
+					Submit
 				</Button>
 				<Button
 					sx={{
