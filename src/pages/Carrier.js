@@ -25,7 +25,7 @@ const Carrier = () => {
 	}, []);
 	return (
 		<Layout>
-			<Box sx={{ minHeight: 'max(75vh,auto)', minWidth: '350px' }}>
+			<Box sx={{ minWidth: '350px' }}>
 				<div
 					style={{
 						padding: '1.5em 0',
@@ -34,7 +34,6 @@ const Carrier = () => {
 						flexDirection: 'column',
 						justifyContent: 'center',
 						alignItems: 'center',
-						minHeight: '100vh',
 					}}
 				>
 					{pop ? (
@@ -43,15 +42,7 @@ const Carrier = () => {
 						</Box>
 					) : (
 						<>
-							<Box
-								marginBottom="2rem"
-								width="100%"
-								paddingX="2.5rem"
-								display="flex"
-								justifyContent="space-between"
-								alignItems={'center'}
-								flexWrap="wrap"
-							>
+							<Box margin="2rem 0" width="100%" paddingX="2.5rem" display="flex" justifyContent="space-between" alignItems={'center'} flexWrap="wrap">
 								<Typography variant="h2" fontWeight="700" color="rgba(245,245,240,0.9)">
 									Vacancies
 								</Typography>

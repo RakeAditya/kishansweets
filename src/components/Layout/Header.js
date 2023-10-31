@@ -29,9 +29,7 @@ const Header = () => {
 					</a> */}
 					<NavLink to={'/about'}>About Us</NavLink>
 				</li>
-				<li>
-					<NavLink to={'/menu'}>Menu</NavLink>
-				</li>
+
 				<li>
 					<NavLink to={'/carrier'}>Vacancy</NavLink>
 				</li>
@@ -74,9 +72,6 @@ const Header = () => {
 										Menu
 									</a> */}
 									<NavLink to={'/about'}>About</NavLink>
-								</li>
-								<li>
-									<NavLink to={'/menu'}>Menu</NavLink>
 								</li>
 								<li>
 									<NavLink to={'/carrier'}>Vacancy</NavLink>
