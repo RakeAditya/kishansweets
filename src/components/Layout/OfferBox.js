@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import popImg from './../../images/pop.jpg';
+import popImg from './../../images/popbox.jpg';
 const OfferBox = ({ pop }) => {
 	return (
 		<Box
@@ -22,8 +22,7 @@ const OfferBox = ({ pop }) => {
 		>
 			<Box
 				sx={{
-					bgcolor: 'white',
-					width: 'min(100%,1200px)',
+					width: 'min(100%,1000px)',
 				}}
 				// onClick={}
 			>

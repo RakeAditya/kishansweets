@@ -16,7 +16,9 @@ const Layout = ({ children }) => {
 				</Box>
 			)}
 
-			<div className="main-div">{children}</div>
+			<div className="main-div" style={{ minWidth: '350px' }}>
+				{children}
+			</div>
 			<Footer />
 		</>
 	);

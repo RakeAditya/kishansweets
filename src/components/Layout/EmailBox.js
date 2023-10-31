@@ -6,10 +6,12 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import axios from 'axios';
 import avatar from './../../images/avatar.png';
+// import { da } from 'date-fns/locale';
 // import { DateTimePicker } from '@mui'
 const EmailBox = ({ setPop, arr, val }) => {
 	const imageRef = React.useRef(null);
 	// form sates
+	const avatar64 = avatar.slice(22);
 	const [image, setImage] = React.useState(null);
 	const [name, setName] = React.useState('');
 	const [fname, setFname] = React.useState('');
@@ -28,51 +30,61 @@ const EmailBox = ({ setPop, arr, val }) => {
 	const [qual, setQaul] = React.useState('');
 	const [sal, setSal] = React.useState(0);
 	// submit FOrm
+	// start image
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
+			console.log('insode other api');
 			const data = await handleImage();
-			if (data == 500) return alert('Please input an mage');
-			console.log('all good');
-
-			// const formData = new FormData();
-			// formData.append('api', 'sdgfwp49f4923d3287slhgw');
-			// formData.append('postid', val - 1);
-			// formData.append('cname', name);
-			// formData.append('fname', fname);
-			// // date selection
-			// const dob = `${selectedDate.$D}/${selectedDate.$M + 1}/${selectedDate.$y}`;
-			// formData.append('dob', dob);
-			// formData.append('mob', mob);
-			// formData.append('alt_mob', amob);
-			// formData.append('gen', gender);
-			// formData.append('aadhar', adhNum);
-			// formData.append('refname', refName);
-			// formData.append('cadd', cadd);
-			// formData.append('shift', shift);
-			// formData.append('exp_dur', exp);
-			// formData.append('quali', qual);
-			// formData.append('exp_sal', sal);
-			// formData.append('refmob', refNum);
-			// formData.append('refadd', refAdd);
-			// // done
-			// formData.forEach((ele) => console.log(ele));
-			// const resp = await axios.post('https://kishansweets.com/apiweb/app_details.aspx', formData);
-			// console.log(resp.data);
-			// if (resp.data.status === 200) setPop((pre) => !pre);
+			console.log(data);
+			if (data.status === 200) {
+				const appno = data.data.appno;
+				const formData = new FormData();
+				formData.append('api', 'sdgfwp49f4923d3287slhgw');
+				formData.append('postid', val - 1);
+				formData.append('appno', appno);
+				formData.append('cname', name);
+				formData.append('fname', fname);
+				// date selection
+				const dob = `${selectedDate.$D}/${selectedDate.$M + 1}/${selectedDate.$y}`;
+				formData.append('dob', dob);
+				formData.append('mob', mob);
+				formData.append('alt_mob', amob);
+				formData.append('gen', gender);
+				formData.append('aadhar', adhNum);
+				formData.append('refname', refName);
+				formData.append('cadd', cadd);
+				formData.append('shift', shift);
+				formData.append('exp_dur', exp);
+				formData.append('quali', qual);
+				formData.append('exp_sal', sal);
+				formData.append('refmob', refNum);
+				formData.append('refadd', refAdd);
+				// done
+				formData.forEach((ele) => console.log(ele));
+				const resp = await axios.post('https://kishansweets.com/apiweb/app_details.aspx', formData);
+				if (resp.data.status === 200) {
+					alert('form submitted');
+					setPop((pre) => !pre);
+				}
+			}
 		} catch (error) {
 			if (error) throw error;
 		}
 	};
 	const handleImage = async () => {
 		try {
-			if (image === '') throw new Error(500);
+			console.log('inside image api');
 			const formData = new FormData();
-			const img = image.slice(23);
 			formData.append('api', 'sdgfwp49f4923d3287slhgw');
-			formData.append('img', img);
+			if (image === '') formData.append('img', process.env.REACT_AVATAR_IMAGE);
+			else {
+				const img = image.slice(23);
+				formData.append('img', img);
+			}
 			const resp = await axios.post('https://kishansweets.com/apiweb/upload_app_photo.aspx', formData);
-			return resp.status;
+			console.log(resp);
+			return resp;
 		} catch (error) {
 			if (error) return 500;
 		}
@@ -82,7 +94,7 @@ const EmailBox = ({ setPop, arr, val }) => {
 		const reader = new FileReader();
 		reader.readAsDataURL(file);
 		reader.onload = () => {
-			console.log('called: ', reader);
+			console.log(reader);
 			setImage(reader.result);
 		};
 	};

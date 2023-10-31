@@ -44,6 +44,7 @@ const Footer = () => {
 							sx={{
 								'@media (max-width:1000px)': {
 									marginX: '1rem',
+									textAlign: 'center',
 								},
 							}}
 							fontWeight={500}

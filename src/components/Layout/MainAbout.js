@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Button, Typography } from '@mui/material';
-import chef1 from '../../images/chef2.jpg';
+import chef1 from '../../images/image1.jpg';
 const MainAbout = () => {
 	return (
 		<Box
@@ -32,7 +32,8 @@ const MainAbout = () => {
 			>
 				{/* left box */}
 				<Box
-					border="1px solid black"
+					boxShadow={'0 0 15px 2px rgb(0,0,0)'}
+					borderRadius={'10px'}
 					height="600px"
 					width="50%"
 					sx={{
@@ -45,7 +46,7 @@ const MainAbout = () => {
 						},
 					}}
 				>
-					<img src={chef1} alt="chef" width="100%" height="100%" style={{ objectFit: 'cover' }} />
+					<img src={chef1} alt="chef" width="100%" height="100%" style={{ objectFit: 'cover', borderRadius: '10px' }} />
 				</Box>
 				{/* right box */}
 				<Box
