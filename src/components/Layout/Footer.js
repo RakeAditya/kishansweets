@@ -2,7 +2,6 @@ import React from 'react';
 import MailIcon from '@mui/icons-material/Mail';
 import CallIcon from '@mui/icons-material/Call';
 import { PinDropTwoTone } from '@mui/icons-material';
-import { Link } from 'react-router-dom';
 import { Box, IconButton, Typography } from '@mui/material';
 
 const Footer = () => {
@@ -34,7 +33,7 @@ const Footer = () => {
 								},
 							}}
 						>
-							Footer
+							<span className="char">W</span>ord from our Chef
 						</Typography>
 						<Typography
 							marginTop="1rem"
@@ -49,10 +48,8 @@ const Footer = () => {
 							}}
 							fontWeight={500}
 						>
-							The menu of this restaurant is recommended to Chinese and Indian cuisine lovers. Order good masala dosa. Kishan Sweets - Restaurant,
-							Best sweets, Best Fast Food, Best Dinner, One of the Best Restaurants in Basti. Efficient staff. The spectacular service is something
-							these restaurateurs care about. Here you will pay medium prices. The exotic atmosphere makes a positive impression on customers and it
-							also has 4 star rating on Google.
+							When you run a kitchen, no matter how crazy and chaotic it gets, you have to be the calm one. You cannot show any sign of fear - the
+							guests pick up on it. The beauty of this kitchen, though, is that everybody helps everybody.
 						</Typography>
 					</Box>
 					{/* middle box */}
@@ -61,11 +58,6 @@ const Footer = () => {
 							Quick Links
 						</Typography>
 						<ul style={{ margin: '0 auto 1rem', listStyle: 'none', textTransform: 'capitalize' }}>
-							{/* <li style={{ margin: ' 1rem 0' }}>
-								<Link to="/" className="styleLink" style={{ textDecoration: 'none' }}>
-									Terms and Conditions
-								</Link>
-							</li> */}
 							<li style={{ margin: ' 1rem 0' }}>
 								<a href="https://kishansweets.com/privacy.aspx" className="styleLink" style={{ textDecoration: 'none' }}>
 									Privacy Policy
@@ -79,7 +71,7 @@ const Footer = () => {
 							Contact Info
 						</Typography>
 						<ul style={{ listStyle: 'none', textTransform: 'capitalize', margin: '0 2rem 1rem ' }}>
-							<li style={{ margin: ' 1rem 0', color: 'white' }}>
+							<li style={{ margin: ' 1rem 0', color: 'white', display: 'flex' }}>
 								<IconButton
 									sx={{
 										padding: '0.5rem',
@@ -95,9 +87,9 @@ const Footer = () => {
 								>
 									<PinDropTwoTone />
 								</IconButton>
-								Kishan Sweets, Near District Hospital, Chiyabari Road, Basti
+								<Typography>Kishan Sweets, Near District Hospital, Chiyabari Road, Basti</Typography>
 							</li>
-							<li style={{ margin: ' 1rem 0', color: 'white' }}>
+							<li style={{ margin: ' 1rem 0', color: 'white', display: 'flex' }}>
 								<IconButton
 									sx={{
 										padding: '0.5rem',
@@ -113,9 +105,10 @@ const Footer = () => {
 								>
 									<CallIcon />
 								</IconButton>
-								Mobile NO - 09936352424
+								<Typography>Mobile NO - 09936352424</Typography>
 							</li>
-							<li style={{ margin: ' 1rem 0', color: 'white' }}>
+
+							<li style={{ margin: ' 1rem 0', color: 'white', display: 'flex' }}>
 								<IconButton
 									sx={{
 										padding: '0.5rem',
@@ -131,7 +124,7 @@ const Footer = () => {
 								>
 									<MailIcon />
 								</IconButton>
-								kishansweetsbasti@gmail.com
+								<Typography>kishansweetsbasti@gmail.com</Typography>
 							</li>
 						</ul>
 					</Box>

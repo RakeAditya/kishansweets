@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import chef1 from '../../images/image1.jpg';
 const MainAbout = () => {
 	return (
@@ -52,7 +52,6 @@ const MainAbout = () => {
 				<Box
 					margin=""
 					width="50%"
-					// border="1px solid red"
 					alignSelf={'center'}
 					display="flex"
 					flexDirection="column"
@@ -68,58 +67,21 @@ const MainAbout = () => {
 						},
 					}}
 				>
-					<Typography variant="h4" color="white" className="font-dance " margin="2rem 0" textAlign="left" width="80%">
-						<span className="char">W</span>ord from our Chef
-					</Typography>
-					<Typography variant="p" textAlign="left" color="white" margin="0 3.5rem">
-						When you run a kitchen, no matter how crazy and chaotic it gets, you have to be the calm one. You cannot show any sign of fear - the
-						guests pick up on it. The beauty of this kitchen, though, is that everybody helps everybody.
-					</Typography>
-
-					<Box
-						// border="1px solid red"
-						width="80%"
-						gap={2}
-						// marginBottom={5}
-						marginTop={5}
-						sx={{
-							'@media (max-width:500px)': {
-								marginLeft: '1rem',
-							},
-						}}
+					<Typography
+						variant="p"
+						textAlign="left"
+						color="white"
+						fontSize={'1.4rem'}
+						letterSpacing={'1px'}
+						margin="0 3.5rem"
+						lineHeight={'2rem'}
+						sx={{ '@media (max-width:1000px)': { textAlign: 'center' } }}
 					>
-						<Box
-							gap={2}
-							display={'flex'}
-							alignItems={'center'}
-							justifyContent={'space-between'}
-							marginTop={2}
-							sx={{
-								'@media (max-width:400px)': {
-									flexDirection: 'column',
-									alignItems: 'flex-start',
-									// marginLeft: '1rem',
-								},
-							}}
-						>
-							<Typography variant="h5" color="white">
-								Chef <span className="char">&</span> Founder
-							</Typography>
-							<Button
-								sx={{
-									padding: '0.5rem 1rem',
-									border: '1px solid black',
-									color: 'white',
-									fontWeight: '700',
-									boxShadow: ' 0 0 10px rgba(0,0,0,0.4)',
-									'&:hover': { backgroundColor: 'black' },
-									transition: '0.2s ease-in',
-								}}
-							>
-								Show more
-							</Button>
-						</Box>
-					</Box>
+						The menu of this restaurant is recommended to Chinese and Indian cuisine lovers. Order good masala dosa. Kishan Sweets - Restaurant, Best
+						sweets, Best Fast Food, Best Dinner, One of the Best Restaurants in Basti. Efficient staff. The spectacular service is something these
+						restaurateurs care about. Here you will pay medium prices. The exotic atmosphere makes a positive impression on customers and it also has
+						4 star rating on Google.
+					</Typography>
 				</Box>
 			</Box>
 		</Box>

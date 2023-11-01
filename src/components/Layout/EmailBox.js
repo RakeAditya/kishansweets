@@ -169,6 +169,9 @@ const EmailBox = ({ setPop, arr, val }) => {
 						helperText={err.errorName}
 						required
 						sx={{
+							fontSize: '1.2rem',
+							fontWeight: '700',
+							letterSpacing: '1px',
 							marginTop: '1.5rem',
 							color: 'black',
 							'& .MuiInputBase-input': {
@@ -178,7 +181,10 @@ const EmailBox = ({ setPop, arr, val }) => {
 								borderBottomColor: 'black',
 							},
 							'& .MuiInputLabel-root': {
-								color: 'black',
+								color: 'rgba(0,0,0,0.6)',
+								fontSize: '1.2rem',
+								fontWeight: '700',
+								letterSpacing: '1px',
 							},
 							'&:hover .MuiInput-underline:before': {
 								borderBottomColor: 'black',
@@ -199,8 +205,10 @@ const EmailBox = ({ setPop, arr, val }) => {
 						error={err.errorFname && err.errorFname.length ? true : false}
 						helperText={err.errorFname}
 						sx={{
-							marginTop: '2em',
 							color: 'black',
+							'@media (max-width:800px)': {
+								marginY: '0.5rem',
+							},
 							'& .MuiInputBase-input': {
 								color: 'black',
 							},
@@ -208,7 +216,10 @@ const EmailBox = ({ setPop, arr, val }) => {
 								borderBottomColor: 'black',
 							},
 							'& .MuiInputLabel-root': {
-								color: 'black',
+								color: 'rgba(0,0,0,0.6)',
+								fontSize: '1.2rem',
+								fontWeight: '700',
+								letterSpacing: '1px',
 							},
 							'&:hover .MuiInput-underline:before': {
 								borderBottomColor: 'black',
@@ -258,10 +269,12 @@ const EmailBox = ({ setPop, arr, val }) => {
 				</Box>
 			</Box>
 			<Box
+				// border={'1px solid red'}
+				// marginTop={'1em'}
 				display={'flex'}
 				justifyContent={'space-between'}
 				alignItems={'center'}
-				gap={2}
+				gap={1}
 				sx={{ '@media (max-width:800px)': { flexDirection: 'column' } }}
 			>
 				<TextField
@@ -274,7 +287,7 @@ const EmailBox = ({ setPop, arr, val }) => {
 					helperText={err.errorMob}
 					sx={{
 						flex: 1,
-						marginTop: '1em',
+						// marginTop: '1em',
 						color: 'black',
 						'& .MuiInputBase-input': {
 							color: 'black',
@@ -283,7 +296,10 @@ const EmailBox = ({ setPop, arr, val }) => {
 							borderBottomColor: 'black',
 						},
 						'& .MuiInputLabel-root': {
-							color: 'black',
+							color: 'rgba(0,0,0,0.6)',
+							fontSize: '1.2rem',
+							fontWeight: '700',
+							letterSpacing: '1px',
 						},
 						'&:hover .MuiInput-underline:before': {
 							borderBottomColor: 'black',
@@ -304,7 +320,7 @@ const EmailBox = ({ setPop, arr, val }) => {
 					sx={{
 						// border: '1px solid red',
 						flex: 1,
-						marginTop: '1em',
+						marginTop: '0em',
 						color: 'black',
 						'& .MuiInputBase-input': {
 							color: 'black',
@@ -313,7 +329,10 @@ const EmailBox = ({ setPop, arr, val }) => {
 							borderBottomColor: 'black',
 						},
 						'& .MuiInputLabel-root': {
-							color: 'black',
+							color: 'rgba(0,0,0,0.6)',
+							fontSize: '1.2rem',
+							fontWeight: '700',
+							letterSpacing: '1px',
 						},
 						'&:hover .MuiInput-underline:before': {
 							borderBottomColor: 'black',
@@ -327,17 +346,20 @@ const EmailBox = ({ setPop, arr, val }) => {
 				/>
 			</Box>
 			<Box
+				marginTop={'1em'}
 				display={'flex'}
 				justifyContent={'space-between'}
 				alignItems={'flex-end'}
 				gap={2}
 				sx={{ '@media (max-width:800px)': { flexDirection: 'column' } }}
 			>
-				<LocalizationProvider dateAdapter={AdapterDayjs}>
-					<DemoContainer components={['DatePicker']}>
-						<DatePicker label="Basic date picker" format="DD/MM/YY" value={selectedDate} onChange={setSelectedDate} />
-					</DemoContainer>
-				</LocalizationProvider>
+				<FormControl variant="standard" fullWidth sx={{ flex: 1 }}>
+					<LocalizationProvider dateAdapter={AdapterDayjs}>
+						<DemoContainer components={['DatePicker']}>
+							<DatePicker label="Date of Birth" format="DD/MM/YY" defaultValue={'22/12/20'} value={selectedDate} onChange={setSelectedDate} />
+						</DemoContainer>
+					</LocalizationProvider>
+				</FormControl>
 				<FormControl variant="standard" fullWidth sx={{ flex: 1 }}>
 					<InputLabel sx={{ fontSize: '1.2rem', fontWeight: '700', letterSpacing: '1px' }}>Gender</InputLabel>
 					<Select label="Gender" value={gender} onChange={(e) => setGender(e.target.value)}>
@@ -364,7 +386,6 @@ const EmailBox = ({ setPop, arr, val }) => {
 					helperText={err.errorAdh}
 					sx={{
 						flex: 1,
-						marginTop: '1em',
 						color: 'black',
 						'& .MuiInputBase-input': {
 							color: 'black',
@@ -373,7 +394,10 @@ const EmailBox = ({ setPop, arr, val }) => {
 							borderBottomColor: 'black',
 						},
 						'& .MuiInputLabel-root': {
-							color: 'black',
+							color: 'rgba(0,0,0,0.6)',
+							fontSize: '1.2rem',
+							fontWeight: '700',
+							letterSpacing: '1px',
 						},
 						'&:hover .MuiInput-underline:before': {
 							borderBottomColor: 'black',
@@ -393,7 +417,7 @@ const EmailBox = ({ setPop, arr, val }) => {
 				fullWidth
 				required
 				sx={{
-					marginTop: '2em',
+					marginTop: '1em',
 					color: 'black',
 					'& .MuiInputBase-input': {
 						color: 'black',
@@ -402,7 +426,10 @@ const EmailBox = ({ setPop, arr, val }) => {
 						borderBottomColor: 'black',
 					},
 					'& .MuiInputLabel-root': {
-						color: 'black',
+						color: 'rgba(0,0,0,0.6)',
+						fontSize: '1.2rem',
+						fontWeight: '700',
+						letterSpacing: '1px',
 					},
 					'&:hover .MuiInput-underline:before': {
 						borderBottomColor: 'black',
@@ -418,7 +445,7 @@ const EmailBox = ({ setPop, arr, val }) => {
 				display={'flex'}
 				justifyContent={'space-between'}
 				gap={2}
-				sx={{ marginTop: '2rem', '@media (max-width:800px)': { flexDirection: 'column' } }}
+				sx={{ marginTop: '1em', '@media (max-width:800px)': { flexDirection: 'column' } }}
 			>
 				{/* shift change */}
 				<FormControl variant="standard" fullWidth sx={{ flex: 1 }}>
@@ -450,7 +477,7 @@ const EmailBox = ({ setPop, arr, val }) => {
 				justifyContent={'space-between'}
 				alignItems={'center'}
 				gap={2}
-				sx={{ marginTop: '2rem', '@media (max-width:800px)': { flexDirection: 'column' } }}
+				sx={{ marginTop: '1em', '@media (max-width:800px)': { flexDirection: 'column' } }}
 			>
 				{/* shift change */}
 				<FormControl variant="standard" fullWidth sx={{ flex: 1 }}>
@@ -494,7 +521,9 @@ const EmailBox = ({ setPop, arr, val }) => {
 				)}
 			</Box>
 			<Box width={'100%'} marginTop="1em" display={'flex'} alignItems={'center'} gap={2}>
-				<Typography>Referred By someone : -</Typography>
+				<Typography sx={{ fontSize: '1.1rem', fontWeight: '600', letterSpacing: '1px', color: 'rgba(0,0,0,0.7)' }}>
+					Referred By someone : -
+				</Typography>
 				<input type="checkbox" value={toggle} onChange={() => setToggle((pre) => !pre)} />
 			</Box>
 			{toggle && (
@@ -503,6 +532,7 @@ const EmailBox = ({ setPop, arr, val }) => {
 						display={'flex'}
 						justifyContent={'space-between'}
 						alignItems={'center'}
+						marginTop={'1em'}
 						gap={2}
 						sx={{ '@media (max-width:800px)': { flexDirection: 'column' }, transition: '1s ease-in' }}
 					>
@@ -513,7 +543,6 @@ const EmailBox = ({ setPop, arr, val }) => {
 							fullWidth
 							sx={{
 								flex: 1,
-								marginTop: '1em',
 								color: 'black',
 								'& .MuiInputBase-input': {
 									color: 'black',
@@ -522,7 +551,10 @@ const EmailBox = ({ setPop, arr, val }) => {
 									borderBottomColor: 'black',
 								},
 								'& .MuiInputLabel-root': {
-									color: 'black',
+									fontSize: '1.2rem',
+									fontWeight: '600',
+									letterSpacing: '1px',
+									color: 'rgba(0,0,0,0.7)',
 								},
 								'&:hover .MuiInput-underline:before': {
 									borderBottomColor: 'black',
@@ -540,9 +572,7 @@ const EmailBox = ({ setPop, arr, val }) => {
 							variant="standard"
 							fullWidth
 							sx={{
-								// border: '1px solid red',
 								flex: 1,
-								marginTop: '1em',
 								color: 'black',
 								'& .MuiInputBase-input': {
 									color: 'black',
@@ -551,7 +581,10 @@ const EmailBox = ({ setPop, arr, val }) => {
 									borderBottomColor: 'black',
 								},
 								'& .MuiInputLabel-root': {
-									color: 'black',
+									fontSize: '1.2rem',
+									fontWeight: '600',
+									letterSpacing: '1px',
+									color: 'rgba(0,0,0,0.7)',
 								},
 								'&:hover .MuiInput-underline:before': {
 									borderBottomColor: 'black',
@@ -580,7 +613,10 @@ const EmailBox = ({ setPop, arr, val }) => {
 								borderBottomColor: 'black',
 							},
 							'& .MuiInputLabel-root': {
-								color: 'black',
+								fontSize: '1.2rem',
+								fontWeight: '600',
+								letterSpacing: '1px',
+								color: 'rgba(0,0,0,0.7)',
 							},
 							'&:hover .MuiInput-underline:before': {
 								borderBottomColor: 'black',
