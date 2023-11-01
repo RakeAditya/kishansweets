@@ -59,7 +59,7 @@ const Footer = () => {
 						</Typography>
 						<ul style={{ margin: '0 auto 1rem', listStyle: 'none', textTransform: 'capitalize' }}>
 							<li style={{ margin: ' 1rem 0' }}>
-								<a href="https://kishansweets.com/privacy.aspx" className="styleLink" style={{ textDecoration: 'none' }}>
+								<a href="https://kishansweets.com/privacy.aspx" className="styleLink" style={{ textDecoration: 'none', fontSize: '1.3rem' }}>
 									Privacy Policy
 								</a>
 							</li>
@@ -132,18 +132,7 @@ const Footer = () => {
 				{/* 4th box */}
 				<Box display="flex" marginTop="1rem" justifyContent="space-between" alignItems={'center'} gap={1}>
 					<Typography
-						variant="h5"
-						color="white"
-						sx={{
-							'@media (max-width:1000px)': {
-								fontSize: '18px',
-							},
-						}}
-					>
-						All right reserved © kishansweets
-					</Typography>
-					<Typography
-						variant="h6"
+						variant="body1"
 						color="white"
 						sx={{
 							'@media (max-width:1000px)': {
@@ -151,7 +140,18 @@ const Footer = () => {
 							},
 						}}
 					>
-						Poweed By : Infosoft Networks
+						All right reserved © kishansweets
+					</Typography>
+					<Typography
+						variant="body1"
+						color="white"
+						sx={{
+							'@media (max-width:1000px)': {
+								fontSize: '14px',
+							},
+						}}
+					>
+						Powered By : Infosoft Networks
 					</Typography>
 				</Box>
 			</Box>

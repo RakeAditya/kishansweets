@@ -55,7 +55,7 @@ const Header = () => {
 								},
 							}}
 						>
-							<img src={Logo} alt="logo" height={'70'} width="90" style={{ margin: '5px 20px 5px 0' }} /> Kishan Sweets & Restaurent
+							<img src={Logo} alt="logo" height={'70'} width="90" style={{ margin: '5px 20px 5px 0' }} /> Kishan Sweets & Restaurant
 						</Typography>
 						<Box sx={{ display: { xs: 'none', md: 'block' } }}>
 							<ul className="navigation-menu">

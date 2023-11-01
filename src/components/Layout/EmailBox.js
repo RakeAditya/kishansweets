@@ -483,6 +483,7 @@ const EmailBox = ({ setPop, arr, val }) => {
 				<FormControl variant="standard" fullWidth sx={{ flex: 1 }}>
 					<InputLabel sx={{ fontSize: '1.2rem', fontWeight: '700', letterSpacing: '1px' }}>Qualifications</InputLabel>
 					<Select label="State" value={qual} onChange={(e) => setQaul(e.target.value)}>
+						<MenuItem value="high school">Below High School</MenuItem>
 						<MenuItem value="high school">High School</MenuItem>
 						<MenuItem value="intermediate">Intermediate</MenuItem>
 						<MenuItem value="graduate">Graduate</MenuItem>
@@ -490,7 +491,7 @@ const EmailBox = ({ setPop, arr, val }) => {
 					</Select>
 				</FormControl>
 				{/* Expected Salary */}
-				{head !== 'milkman' && (
+				{head !== 'Milk Man' && (
 					<TextField
 						label="Expected Salary"
 						type="number"
