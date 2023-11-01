@@ -34,7 +34,7 @@ const MainAbout = () => {
 				<Box
 					boxShadow={'0 0 15px 2px rgb(0,0,0)'}
 					borderRadius={'10px'}
-					height="600px"
+					height="550px"
 					width="50%"
 					sx={{
 						'@media (max-width:1000px)': {
@@ -52,6 +52,8 @@ const MainAbout = () => {
 				<Box
 					margin=""
 					width="50%"
+					// border="1px solid red"
+					alignSelf={'center'}
 					display="flex"
 					flexDirection="column"
 					alignItems="center"
@@ -70,10 +72,8 @@ const MainAbout = () => {
 						<span className="char">W</span>ord from our Chef
 					</Typography>
 					<Typography variant="p" textAlign="left" color="white" margin="0 3.5rem">
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dolor neque, condimentum quis ante ac, imperdiet varius sapien. Maecenas
-						commodo ante et odio varius, at placerat mi tristique. Etiam et neque et magna finibus vestibulum. Lorem ipsum dolor sit amet, consectetur
-						adipiscing elit. Aliquam dolor neque, condimentum quis ante ac, imperdiet varius sapien. Maecenas commodo ante et odio varius, at placerat
-						mi tristique. Etiam et neque et magna finibus vestibulum.
+						When you run a kitchen, no matter how crazy and chaotic it gets, you have to be the calm one. You cannot show any sign of fear - the
+						guests pick up on it. The beauty of this kitchen, though, is that everybody helps everybody.
 					</Typography>
 
 					<Box
@@ -88,9 +88,6 @@ const MainAbout = () => {
 							},
 						}}
 					>
-						<Typography variant="h4" textAlign="left" color="white" alignSelf="flex-start">
-							Name ABC
-						</Typography>
 						<Box
 							gap={2}
 							display={'flex'}

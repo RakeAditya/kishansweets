@@ -6,13 +6,11 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import axios from 'axios';
 import avatar from './../../images/avatar.png';
-// import { da } from 'date-fns/locale';
-// import { DateTimePicker } from '@mui'
 const EmailBox = ({ setPop, arr, val }) => {
+	const head = arr[val - 1].post_name;
 	const imageRef = React.useRef(null);
-	// form sates
 	const avatar64 = avatar.slice(22);
-	const [image, setImage] = React.useState(null);
+	const [image, setImage] = React.useState('');
 	const [name, setName] = React.useState('');
 	const [fname, setFname] = React.useState('');
 	const [mob, setMob] = React.useState('');
@@ -24,17 +22,54 @@ const EmailBox = ({ setPop, arr, val }) => {
 	const [refName, setRefName] = React.useState('');
 	const [refNum, setRefNum] = React.useState('');
 	const [refAdd, setRefAdd] = React.useState('');
+	const [toggle, setToggle] = React.useState(false);
 	// dropdown states
 	const [shift, setShift] = React.useState('');
 	const [exp, setExp] = React.useState('');
 	const [qual, setQaul] = React.useState('');
 	const [sal, setSal] = React.useState(0);
+	//
+	// Error fields
+	const [err, setErr] = React.useState({
+		errorName: '',
+		errorFname: '',
+		errorMob: '',
+		errorAdh: '',
+	});
 	// submit FOrm
 	// start image
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
 			console.log('insode other api');
+			// validation section
+			if (!name && !name.length) {
+				setErr({ ...err, errorName: 'Name must be alphabets only ' });
+				return;
+			} else {
+				setErr({ ...err, errorName: '' });
+			}
+
+			if (!fname && !fname.length) {
+				setErr({ ...err, errorFname: "Father's Name must be alphabets only" });
+				return;
+			} else {
+				setErr({ ...err, errorFname: '' });
+			}
+			// number validation
+			if (!mob && mob.length !== 10) {
+				setErr({ ...err, errorFname: 'Mobile Number should be of 10 digits only' });
+				return;
+			} else {
+				setErr({ ...err, errorFname: '' });
+			}
+			// adhaar validation
+			if (!adhNum && adhNum.length !== 10) {
+				setErr({ ...err, errorAdh: 'Aadhar number must be 12 digits only with no whitespaces' });
+				return;
+			} else {
+				setErr({ ...err, errorAdh: '' });
+			}
 			const data = await handleImage();
 			console.log(data);
 			if (data.status === 200) {
@@ -45,7 +80,7 @@ const EmailBox = ({ setPop, arr, val }) => {
 				formData.append('appno', appno);
 				formData.append('cname', name);
 				formData.append('fname', fname);
-				// date selection
+				// 	// date selection
 				const dob = `${selectedDate.$D}/${selectedDate.$M + 1}/${selectedDate.$y}`;
 				formData.append('dob', dob);
 				formData.append('mob', mob);
@@ -60,8 +95,6 @@ const EmailBox = ({ setPop, arr, val }) => {
 				formData.append('exp_sal', sal);
 				formData.append('refmob', refNum);
 				formData.append('refadd', refAdd);
-				// done
-				formData.forEach((ele) => console.log(ele));
 				const resp = await axios.post('https://kishansweets.com/apiweb/app_details.aspx', formData);
 				if (resp.data.status === 200) {
 					alert('form submitted');
@@ -74,16 +107,19 @@ const EmailBox = ({ setPop, arr, val }) => {
 	};
 	const handleImage = async () => {
 		try {
-			console.log('inside image api');
+			// console.log('inside image api', image);
 			const formData = new FormData();
 			formData.append('api', 'sdgfwp49f4923d3287slhgw');
-			if (image === '') formData.append('img', process.env.REACT_AVATAR_IMAGE);
-			else {
+			if (image === '') {
+				formData.append('img', avatar64);
+				formData.append('sts', 'avt');
+			} else {
 				const img = image.slice(23);
 				formData.append('img', img);
+				formData.append('sts', 'org');
 			}
 			const resp = await axios.post('https://kishansweets.com/apiweb/upload_app_photo.aspx', formData);
-			console.log(resp);
+			// console.log(resp);
 			return resp;
 		} catch (error) {
 			if (error) return 500;
@@ -101,7 +137,6 @@ const EmailBox = ({ setPop, arr, val }) => {
 
 	return (
 		<Box
-			// minHeight="650px"
 			width="min(1000px,100%)"
 			borderRadius={'25px'}
 			padding="2rem"
@@ -123,13 +158,16 @@ const EmailBox = ({ setPop, arr, val }) => {
 			>
 				<Box flex={2} sx={{ '@media (max-width:800px)': { width: '100%' } }}>
 					<Typography variant="h5" fontWeight="600" letterSpacing="1px" sx={{ '@media (max-width: 800px)': { textAlign: 'center' } }}>
-						Opening for - <span style={{ fontSize: '1.7rem', fontWeight: '800' }}>{arr[val - 1].post_name}</span>
+						Opening for - <span style={{ fontSize: '1.7rem', fontWeight: '800' }}>{head}</span>
 					</Typography>
 					<TextField
 						label="Full Name"
 						type="text"
 						variant="standard"
 						fullWidth
+						error={err.errorName && err.errorName.length ? true : false}
+						helperText={err.errorName}
+						required
 						sx={{
 							marginTop: '1.5rem',
 							color: 'black',
@@ -157,6 +195,9 @@ const EmailBox = ({ setPop, arr, val }) => {
 						type="text"
 						variant="standard"
 						fullWidth
+						required
+						error={err.errorFname && err.errorFname.length ? true : false}
+						helperText={err.errorFname}
 						sx={{
 							marginTop: '2em',
 							color: 'black',
@@ -183,9 +224,10 @@ const EmailBox = ({ setPop, arr, val }) => {
 				<Box flex={1}>
 					<Box
 						onClick={() => imageRef.current.click()}
-						width={'200px'}
-						height={'200px'}
+						width={'190px'}
+						height={'220px'}
 						border="1px solid black"
+						borderRadius="25px"
 						bgcolor="rgba(0,0,0,0.5)"
 						display="flex"
 						justifyContent={'center'}
@@ -208,14 +250,13 @@ const EmailBox = ({ setPop, arr, val }) => {
 							}}
 						/>
 						{image ? (
-							<img src={image} alt="" height="200px" width="200px" style={{ objectFit: 'cover' }} />
+							<img src={image} alt="" height="100%" width="100%" style={{ objectFit: 'cover', borderRadius: '25px' }} />
 						) : (
 							<img src={avatar} alt="" height="100px" width="100px" style={{ objectFit: 'cover' }} />
 						)}
 					</Box>
 				</Box>
 			</Box>
-			{/* contact box */}
 			<Box
 				display={'flex'}
 				justifyContent={'space-between'}
@@ -228,6 +269,9 @@ const EmailBox = ({ setPop, arr, val }) => {
 					type="number"
 					variant="standard"
 					fullWidth
+					required
+					error={err.errorMob && err.errorMob.length ? true : false}
+					helperText={err.errorMob}
 					sx={{
 						flex: 1,
 						marginTop: '1em',
@@ -250,12 +294,12 @@ const EmailBox = ({ setPop, arr, val }) => {
 					}}
 					value={mob}
 					onChange={(e) => setMob(e.target.value)}
-					required
 				/>
 				<TextField
 					label="Alternate Mobile Number"
 					type="number"
 					variant="standard"
+					required
 					fullWidth
 					sx={{
 						// border: '1px solid red',
@@ -282,7 +326,6 @@ const EmailBox = ({ setPop, arr, val }) => {
 					onChange={(e) => setAmob(e.target.value)}
 				/>
 			</Box>
-			{/* Date field */}
 			<Box
 				display={'flex'}
 				justifyContent={'space-between'}
@@ -304,7 +347,6 @@ const EmailBox = ({ setPop, arr, val }) => {
 					</Select>
 				</FormControl>
 			</Box>
-			{/* Reference name */}
 			<Box
 				display={'flex'}
 				justifyContent={'space-between'}
@@ -317,6 +359,9 @@ const EmailBox = ({ setPop, arr, val }) => {
 					type="number"
 					variant="standard"
 					fullWidth
+					required
+					error={err.errorAdh && err.errorAdh.length ? true : false}
+					helperText={err.errorAdh}
 					sx={{
 						flex: 1,
 						marginTop: '1em',
@@ -341,13 +386,12 @@ const EmailBox = ({ setPop, arr, val }) => {
 					onChange={(e) => setAdhNum(e.target.value)}
 				/>
 			</Box>
-
-			{/* Address */}
 			<TextField
 				label="Address"
 				type="text"
 				variant="standard"
 				fullWidth
+				required
 				sx={{
 					marginTop: '2em',
 					color: 'black',
@@ -400,7 +444,6 @@ const EmailBox = ({ setPop, arr, val }) => {
 					</Select>
 				</FormControl>
 			</Box>
-			{/* last row */}
 			<Box
 				// border={'1px solid red'}
 				display={'flex'}
@@ -420,127 +463,137 @@ const EmailBox = ({ setPop, arr, val }) => {
 					</Select>
 				</FormControl>
 				{/* Expected Salary */}
-				<TextField
-					label="Expected Salary"
-					type="number"
-					variant="standard"
-					fullWidth
-					value={sal}
-					onChange={(e) => setSal(e.target.value)}
-					sx={{
-						flex: 1,
-						color: 'black',
-						'& .MuiInputBase-input': {
+				{head !== 'milkman' && (
+					<TextField
+						label="Expected Salary"
+						type="number"
+						variant="standard"
+						fullWidth
+						value={sal}
+						onChange={(e) => setSal(e.target.value)}
+						sx={{
+							flex: 1,
 							color: 'black',
-						},
-						'& .MuiInput-underline:after': {
-							borderBottomColor: 'black',
-						},
-						'& .MuiInputLabel-root': {
-							color: 'black',
-						},
-						'&:hover .MuiInput-underline:before': {
-							borderBottomColor: 'black',
-						},
-						'&:focus .MuiInput-underline:before': {
-							borderBottomColor: 'black',
-						},
-					}}
-				/>
+							'& .MuiInputBase-input': {
+								color: 'black',
+							},
+							'& .MuiInput-underline:after': {
+								borderBottomColor: 'black',
+							},
+							'& .MuiInputLabel-root': {
+								color: 'black',
+							},
+							'&:hover .MuiInput-underline:before': {
+								borderBottomColor: 'black',
+							},
+							'&:focus .MuiInput-underline:before': {
+								borderBottomColor: 'black',
+							},
+						}}
+					/>
+				)}
 			</Box>
-			<Box
-				display={'flex'}
-				justifyContent={'space-between'}
-				alignItems={'center'}
-				gap={2}
-				sx={{ '@media (max-width:800px)': { flexDirection: 'column' } }}
-			>
-				<TextField
-					label="Reference Name"
-					type="text"
-					variant="standard"
-					fullWidth
-					sx={{
-						flex: 1,
-						marginTop: '1em',
-						color: 'black',
-						'& .MuiInputBase-input': {
-							color: 'black',
-						},
-						'& .MuiInput-underline:after': {
-							borderBottomColor: 'black',
-						},
-						'& .MuiInputLabel-root': {
-							color: 'black',
-						},
-						'&:hover .MuiInput-underline:before': {
-							borderBottomColor: 'black',
-						},
-						'&:focus .MuiInput-underline:before': {
-							borderBottomColor: 'black',
-						},
-					}}
-					value={refName}
-					onChange={(e) => setRefName(e.target.value)}
-				/>
-				<TextField
-					label="Reference Mobile Number"
-					type="number"
-					variant="standard"
-					fullWidth
-					sx={{
-						// border: '1px solid red',
-						flex: 1,
-						marginTop: '1em',
-						color: 'black',
-						'& .MuiInputBase-input': {
-							color: 'black',
-						},
-						'& .MuiInput-underline:after': {
-							borderBottomColor: 'black',
-						},
-						'& .MuiInputLabel-root': {
-							color: 'black',
-						},
-						'&:hover .MuiInput-underline:before': {
-							borderBottomColor: 'black',
-						},
-						'&:focus .MuiInput-underline:before': {
-							borderBottomColor: 'black',
-						},
-					}}
-					value={refNum}
-					onChange={(e) => setRefNum(e.target.value)}
-				/>
+			<Box width={'100%'} marginTop="1em" display={'flex'} alignItems={'center'} gap={2}>
+				<Typography>Referred By someone : -</Typography>
+				<input type="checkbox" value={toggle} onChange={() => setToggle((pre) => !pre)} />
 			</Box>
-			<TextField
-				label="Reference Person Address"
-				type="text"
-				variant="standard"
-				fullWidth
-				sx={{
-					flex: 1,
-					marginTop: '1em',
-					color: 'black',
-					'& .MuiInputBase-input': {
-						color: 'black',
-					},
-					'& .MuiInput-underline:after': {
-						borderBottomColor: 'black',
-					},
-					'& .MuiInputLabel-root': {
-						color: 'black',
-					},
-					'&:hover .MuiInput-underline:before': {
-						borderBottomColor: 'black',
-					},
-					'&:focus .MuiInput-underline:before': {
-						borderBottomColor: 'black',
-					},
-				}}
-				value={refAdd}
-				onChange={(e) => setRefAdd(e.target.value)}
-			/>
+			{toggle && (
+				<>
+					<Box
+						display={'flex'}
+						justifyContent={'space-between'}
+						alignItems={'center'}
+						gap={2}
+						sx={{ '@media (max-width:800px)': { flexDirection: 'column' }, transition: '1s ease-in' }}
+					>
+						<TextField
+							label="Reference Name"
+							type="text"
+							variant="standard"
+							fullWidth
+							sx={{
+								flex: 1,
+								marginTop: '1em',
+								color: 'black',
+								'& .MuiInputBase-input': {
+									color: 'black',
+								},
+								'& .MuiInput-underline:after': {
+									borderBottomColor: 'black',
+								},
+								'& .MuiInputLabel-root': {
+									color: 'black',
+								},
+								'&:hover .MuiInput-underline:before': {
+									borderBottomColor: 'black',
+								},
+								'&:focus .MuiInput-underline:before': {
+									borderBottomColor: 'black',
+								},
+							}}
+							value={refName}
+							onChange={(e) => setRefName(e.target.value)}
+						/>
+						<TextField
+							label="Reference Mobile Number"
+							type="number"
+							variant="standard"
+							fullWidth
+							sx={{
+								// border: '1px solid red',
+								flex: 1,
+								marginTop: '1em',
+								color: 'black',
+								'& .MuiInputBase-input': {
+									color: 'black',
+								},
+								'& .MuiInput-underline:after': {
+									borderBottomColor: 'black',
+								},
+								'& .MuiInputLabel-root': {
+									color: 'black',
+								},
+								'&:hover .MuiInput-underline:before': {
+									borderBottomColor: 'black',
+								},
+								'&:focus .MuiInput-underline:before': {
+									borderBottomColor: 'black',
+								},
+							}}
+							value={refNum}
+							onChange={(e) => setRefNum(e.target.value)}
+						/>
+					</Box>
+					<TextField
+						label="Reference Person Address"
+						type="text"
+						variant="standard"
+						fullWidth
+						sx={{
+							flex: 1,
+							marginTop: '1em',
+							color: 'black',
+							'& .MuiInputBase-input': {
+								color: 'black',
+							},
+							'& .MuiInput-underline:after': {
+								borderBottomColor: 'black',
+							},
+							'& .MuiInputLabel-root': {
+								color: 'black',
+							},
+							'&:hover .MuiInput-underline:before': {
+								borderBottomColor: 'black',
+							},
+							'&:focus .MuiInput-underline:before': {
+								borderBottomColor: 'black',
+							},
+						}}
+						value={refAdd}
+						onChange={(e) => setRefAdd(e.target.value)}
+					/>
+				</>
+			)}
 			{/* button box */}
 			<Box
 				display={'flex'}

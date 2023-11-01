@@ -49,7 +49,10 @@ const Footer = () => {
 							}}
 							fontWeight={500}
 						>
-							lasdasd asdasda sd asd as dasd as dasd asd asd asd asd as das dasdas asdasdas dasdasda sasd asdasfds sdfhba sjkdbh
+							The menu of this restaurant is recommended to Chinese and Indian cuisine lovers. Order good masala dosa. Kishan Sweets - Restaurant,
+							Best sweets, Best Fast Food, Best Dinner, One of the Best Restaurants in Basti. Efficient staff. The spectacular service is something
+							these restaurateurs care about. Here you will pay medium prices. The exotic atmosphere makes a positive impression on customers and it
+							also has 4 star rating on Google.
 						</Typography>
 					</Box>
 					{/* middle box */}
@@ -58,15 +61,15 @@ const Footer = () => {
 							Quick Links
 						</Typography>
 						<ul style={{ margin: '0 auto 1rem', listStyle: 'none', textTransform: 'capitalize' }}>
-							<li style={{ margin: ' 1rem 0' }}>
+							{/* <li style={{ margin: ' 1rem 0' }}>
 								<Link to="/" className="styleLink" style={{ textDecoration: 'none' }}>
 									Terms and Conditions
 								</Link>
-							</li>
+							</li> */}
 							<li style={{ margin: ' 1rem 0' }}>
-								<Link to="/" className="styleLink" style={{ textDecoration: 'none' }}>
+								<a href="https://kishansweets.com/privacy.aspx" className="styleLink" style={{ textDecoration: 'none' }}>
 									Privacy Policy
-								</Link>
+								</a>
 							</li>
 						</ul>
 					</Box>
@@ -92,7 +95,7 @@ const Footer = () => {
 								>
 									<PinDropTwoTone />
 								</IconButton>
-								Address
+								Kishan Sweets, Near District Hospital, Chiyabari Road, Basti
 							</li>
 							<li style={{ margin: ' 1rem 0', color: 'white' }}>
 								<IconButton
@@ -110,7 +113,7 @@ const Footer = () => {
 								>
 									<CallIcon />
 								</IconButton>
-								Mobile No.
+								Mobile NO - 09936352424
 							</li>
 							<li style={{ margin: ' 1rem 0', color: 'white' }}>
 								<IconButton
@@ -128,7 +131,7 @@ const Footer = () => {
 								>
 									<MailIcon />
 								</IconButton>
-								Email Address.
+								kishansweetsbasti@gmail.com
 							</li>
 						</ul>
 					</Box>

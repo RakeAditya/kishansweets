@@ -24,9 +24,6 @@ const Header = () => {
 					</NavLink>
 				</li>
 				<li>
-					{/* <a href="https://www.kishansweets.com/" rel="noopener noreferrer">
-						Menu
-					</a> */}
 					<NavLink to={'/about'}>About Us</NavLink>
 				</li>
 
@@ -68,9 +65,6 @@ const Header = () => {
 									</NavLink>
 								</li>
 								<li>
-									{/* <a href="https://www.kishansweets.com/" rel="noopener noreferrer">
-										Menu
-									</a> */}
 									<NavLink to={'/about'}>About</NavLink>
 								</li>
 								<li>

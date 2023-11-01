@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import popImg from './../../images/popbox.jpg';
+import popImg from './../../images/KISHAN SWEETS -1.png';
 const OfferBox = ({ pop }) => {
 	return (
 		<Box
