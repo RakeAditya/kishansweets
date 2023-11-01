@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, HashRouter } from 'react-router-dom';
 import React from 'react';
 import About from './pages/About';
 import Contact from './pages/Contact';
@@ -18,7 +18,7 @@ const Wrapper = ({ children }) => {
 function App() {
 	return (
 		<div className="app">
-			<BrowserRouter>
+			<HashRouter>
 				<Wrapper>
 					<Routes>
 						<Route path="/" element={<Main />} />
@@ -29,7 +29,7 @@ function App() {
 						<Route path="*" element={<Pagenotfound />} />
 					</Routes>
 				</Wrapper>
-			</BrowserRouter>
+			</HashRouter>
 		</div>
 	);
 }
