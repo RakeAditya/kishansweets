@@ -9,7 +9,7 @@ const OfferBox = ({ pop }) => {
 			left={0}
 			height="100%"
 			width={'100%'}
-			bgcolor={'rgba(255,255,255,0.4)'}
+			bgcolor={'rgba(0,0,0,0.4)'}
 			zIndex={2000}
 			sx={{
 				display: 'flex',
