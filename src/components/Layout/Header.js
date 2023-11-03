@@ -39,7 +39,7 @@ const Header = () => {
 	return (
 		<>
 			<Box>
-				<AppBar component={'nav'} sx={{ bgcolor: 'black' }}>
+				<AppBar component={'nav'} sx={{ bgcolor: 'black', paddingY: '0.8rem' }}>
 					<Toolbar>
 						<Typography
 							color={'goldenrod'}

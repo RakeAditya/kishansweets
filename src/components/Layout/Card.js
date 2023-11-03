@@ -15,8 +15,8 @@ const Card = ({ post_name, pgender, exp, shft1, shft2, shft3, extra_req, setPop,
 			flexDirection="column"
 			alignItems="flex-start"
 		>
-			<Typography variant="h5" fontWeight="800" mb="10px">
-				Opening For : <span style={{ textTransform: 'capitalize', fontWeight: '500' }}>{post_name}</span>
+			<Typography variant="h5" fontWeight="800" textTransform={'capitalize'} mb="10px" color="rgba(255,0,50,0.64)">
+				{post_name}
 			</Typography>
 			<Typography variant="h5" mb="10px" fontWeight="800">
 				Gender : <span style={{ textTransform: 'capitalize', fontWeight: '500' }}>{pgender}</span>

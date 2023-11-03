@@ -73,7 +73,15 @@ const Carrier = () => {
 											gridTemplateColumns: 'repeat(2,1fr)',
 										},
 										'@media (min-width: 1200px)': {
+											gridTemplateColumns: 'repeat(3,1fr)',
+										},
+
+										'@media (min-width: 1500px)': {
 											gridTemplateColumns: 'repeat(4,1fr)',
+										},
+
+										'@media (min-width: 1800px)': {
+											gridTemplateColumns: 'repeat(5,1fr)',
 										},
 									}}
 								>

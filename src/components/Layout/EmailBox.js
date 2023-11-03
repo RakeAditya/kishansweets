@@ -7,6 +7,9 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import axios from 'axios';
 import avatar from './../../images/avatar.png';
 const EmailBox = ({ setPop, arr, val }) => {
+	// const dummyDate = new Date();
+	// dummyDate.setFullYear(2020, 11, 1);
+
 	const head = arr[val - 1].post_name;
 	const imageRef = React.useRef(null);
 	const avatar64 = avatar.slice(22);
@@ -205,6 +208,7 @@ const EmailBox = ({ setPop, arr, val }) => {
 						error={err.errorFname && err.errorFname.length ? true : false}
 						helperText={err.errorFname}
 						sx={{
+							marginTop: '1rem',
 							color: 'black',
 							'@media (max-width:800px)': {
 								marginY: '0.5rem',
@@ -236,7 +240,7 @@ const EmailBox = ({ setPop, arr, val }) => {
 					<Box
 						onClick={() => imageRef.current.click()}
 						width={'190px'}
-						height={'220px'}
+						height={'210px'}
 						border="1px solid black"
 						borderRadius="25px"
 						bgcolor="rgba(0,0,0,0.5)"
@@ -283,7 +287,7 @@ const EmailBox = ({ setPop, arr, val }) => {
 					variant="standard"
 					fullWidth
 					required
-					error={err.errorMob && err.errorMob.length ? true : false}
+					error={err.errorMob && (err.errorMob.length || err.errorMob.length === 10) ? true : false}
 					helperText={err.errorMob}
 					sx={{
 						flex: 1,
@@ -472,7 +476,6 @@ const EmailBox = ({ setPop, arr, val }) => {
 				</FormControl>
 			</Box>
 			<Box
-				// border={'1px solid red'}
 				display={'flex'}
 				justifyContent={'space-between'}
 				alignItems={'center'}
@@ -634,33 +637,33 @@ const EmailBox = ({ setPop, arr, val }) => {
 			{/* button box */}
 			<Box
 				display={'flex'}
-				justifyContent="center"
+				// border={'1px solid red'}
+				justifyContent="space-evenly"
 				alignItems="center"
 				marginTop="2em"
+				// gap={1}
 				sx={{
 					'@media (max-width:720px)': {
 						flexDirection: 'column',
-						marginTop: '1em',
 					},
 				}}
 			>
 				<Button
 					sx={{
-						width: '300px',
-						padding: '8px 10px',
-						fontSize: '1.1rem',
-						fontWeight: '600',
+						padding: '8px 2rem',
+						margin: '1rem',
+						textTransform: 'capitalize',
+
+						fontSize: '1.2rem',
 						letterSpacing: '1px',
-						backgroundColor: 'transparent',
-						margin: '1rem 0',
-						color: 'black',
-						borderRadius: '10px',
+						fontWeight: '700',
 						cursor: 'pointer',
-						transition: '0.3 sec ease-in',
-						'&:hover ': {
-							backgroundColor: 'black',
-							boxShadow: '0 0 10px black',
-							color: 'rgb(166, 166, 166)',
+						borderRadius: '10px',
+						color: 'rgba(0,0,255,0.8)',
+						transition: '0.3sec ease',
+						'&:hover': {
+							color: 'white',
+							bgcolor: 'rgba(0,0,0,0.6)',
 						},
 					}}
 					onClick={handleSubmit}
@@ -669,22 +672,19 @@ const EmailBox = ({ setPop, arr, val }) => {
 				</Button>
 				<Button
 					sx={{
-						width: '300px',
-						padding: '8px 10px',
-						fontSize: '1.1rem',
-						fontWeight: '600',
-						letterSpacing: '1px',
-						backgroundColor: 'transparent',
+						padding: '8px 2rem',
 						margin: '1rem',
-						color: 'black',
-						// border: '1px solid black',
-						borderRadius: '10px',
+						textTransform: 'capitalize',
+						fontSize: '1.2rem',
+						letterSpacing: '1px',
+						fontWeight: '700',
 						cursor: 'pointer',
-						transition: '0.3 sec ease-in',
-						'&:hover ': {
-							backgroundColor: 'black',
-							boxShadow: '0 0 10px black',
-							color: 'rgb(166, 166, 166)',
+						borderRadius: '10px',
+						color: 'rgba(0,0,255,0.8)',
+						transition: '0.3sec ease',
+						'&:hover': {
+							color: 'white',
+							bgcolor: 'rgba(0,0,0,0.6)',
 						},
 					}}
 					onClick={() => setPop((pre) => !pre)}
