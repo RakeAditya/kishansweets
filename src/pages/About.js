@@ -42,7 +42,7 @@ const About = () => {
 					},
 				}}
 			>
-				<Typography variant="h4">Welcome To My restaurent </Typography>
+				<Typography variant="h4">Welcome To My Restaurant </Typography>
 				<p>
 					Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat quod, suscipit, aperiam totam autem culpa cum eveniet dolorum quasi est
 					perspiciatis laborum. Nam recusandae nihil quia odio voluptatibus facere omnis facilis rerum? Ab eum beatae nobis reiciendis, qui temporibus

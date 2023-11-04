@@ -70,7 +70,7 @@ const Footer = () => {
 						<Typography variant="h5" fontWeight={800} alignSelf="center" color="white">
 							Contact Info
 						</Typography>
-						<ul style={{ listStyle: 'none', textTransform: 'capitalize', margin: '0 2rem 1rem ' }}>
+						<ul style={{ listStyle: 'none', margin: '0 2rem 1rem ' }}>
 							<li style={{ margin: ' 1rem 0', color: 'white', display: 'flex' }}>
 								<IconButton
 									sx={{
@@ -105,7 +105,7 @@ const Footer = () => {
 								>
 									<CallIcon />
 								</IconButton>
-								<Typography>Mobile NO - 09936352424</Typography>
+								<Typography>Mobile No - 09936352424</Typography>
 							</li>
 
 							<li style={{ margin: ' 1rem 0', color: 'white', display: 'flex' }}>

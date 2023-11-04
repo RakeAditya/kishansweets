@@ -8,7 +8,7 @@ import { Box, IconButton, Typography } from '@mui/material';
 const Contact = () => {
 	return (
 		<Layout>
-			<Box height="100%" minHeight="80vh" minWidth="350px" paddingTop={'1.5em'} sx={{ background: 'linear-gradient(-45deg, #e73c7e, #23d5ab)' }}>
+			<Box height="100%" minHeight="70vh" minWidth="350px" paddingTop={'1.5em'} sx={{ background: 'linear-gradient(-45deg, #e73c7e, #23d5ab)' }}>
 				<Typography
 					variant="h3"
 					className="font-dance"
@@ -76,17 +76,10 @@ const Contact = () => {
 								</IconButton>
 								<Box>
 									<Typography variant="h6" fontWeight={800} letterSpacing={'0.6px'} fontFamily={'monospace'} color="rgba(255,0,0,0.7)">
-										Telephone
+										Contact Number
 									</Typography>
 									<Typography variant="h6" fontWeight={'500'} letterSpacing={'1x'} fontFamily={'monospace'} color="black">
-										+91-0551-2201391
-									</Typography>
-
-									<Typography variant="h6" fontWeight={800} letterSpacing={'0.6px'} fontFamily={'monospace'} color={'rgba(255,0,0,0.7)'}>
-										Mobile
-									</Typography>
-									<Typography variant="h6" fontWeight={'500'} letterSpacing={'1x'} fontFamily={'monospace'} color="black">
-										+91-9598005890, 95980050401
+										09936352424
 									</Typography>
 								</Box>
 							</Box>
@@ -109,14 +102,14 @@ const Contact = () => {
 										Administrative E-mail ID
 									</Typography>
 									<Typography variant="h6" fontWeight={'500'} letterSpacing={'1x'} fontFamily={'monospace'} color="black">
-										md@rkdkgroup@gmail.com
+										kishansweetsbasti@gmail.Com
 									</Typography>
 
 									<Typography variant="h6" fontWeight={'800'} letterSpacing={'0.6px'} fontFamily={'monospace'} color={'rgba(255,0,0,0.7)'}>
 										Corporate E-mail ID
 									</Typography>
 									<Typography variant="h6" fontWeight={'500'} letterSpacing={'1x'} fontFamily={'monospace'} color="black">
-										rkdkgroup@gmail.com
+										contact@kishansweets.com
 									</Typography>
 								</Box>
 							</Box>
@@ -139,7 +132,7 @@ const Contact = () => {
 										Location
 									</Typography>
 									<Typography variant="h6" fontWeight={'500'} letterSpacing={'1x'} fontFamily={'monospace'} color="black">
-										Shahi Market Cinema-Road Gorakhpur, 273001
+										Kishan Sweets, Near District Hospital, Chiyabari Road, Basti
 									</Typography>
 								</Box>
 							</Box>
@@ -150,7 +143,7 @@ const Contact = () => {
 						boxShadow="0 0 20px black"
 						borderRadius="15px"
 						padding="0"
-						height="525px"
+						height="465px"
 						width="50%"
 						sx={{
 							'@media (max-width:1000px)': {
@@ -166,7 +159,7 @@ const Contact = () => {
 							title="map"
 							width="100%"
 							height="100%"
-							src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=Gorakhnath,Gorakhpur+(Kishan%20Sweets)&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+							src="https://maps.google.com/maps?q=Kishan%20Sweets,%20Near%20District%20Hospital,%20Chiyabari%20Road,%20Basti&t=&z=13&ie=UTF8&iwloc=&output=embed"
 						>
 							<a href="https://www.maps.ie/population/">Population calculator map</a>
 						</iframe>
@@ -176,5 +169,4 @@ const Contact = () => {
 		</Layout>
 	);
 };
-
 export default Contact;

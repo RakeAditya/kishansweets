@@ -239,8 +239,8 @@ const EmailBox = ({ setPop, arr, val }) => {
 				<Box flex={1}>
 					<Box
 						onClick={() => imageRef.current.click()}
-						width={'190px'}
-						height={'210px'}
+						width={'170px'}
+						height={'190px'}
 						border="1px solid black"
 						borderRadius="25px"
 						bgcolor="rgba(0,0,0,0.5)"
@@ -279,7 +279,7 @@ const EmailBox = ({ setPop, arr, val }) => {
 				justifyContent={'space-between'}
 				alignItems={'center'}
 				gap={1}
-				sx={{ '@media (max-width:800px)': { flexDirection: 'column' } }}
+				sx={{ '@media (max-width:800px)': { flexDirection: 'column' }, '@media (min-width:800px)': { marginTop: '1rem' } }}
 			>
 				<TextField
 					label="Mobile Number"
@@ -287,8 +287,6 @@ const EmailBox = ({ setPop, arr, val }) => {
 					variant="standard"
 					fullWidth
 					required
-					error={err.errorMob && (err.errorMob.length || err.errorMob.length === 10) ? true : false}
-					helperText={err.errorMob}
 					sx={{
 						flex: 1,
 						// marginTop: '1em',
@@ -313,7 +311,11 @@ const EmailBox = ({ setPop, arr, val }) => {
 						},
 					}}
 					value={mob}
-					onChange={(e) => setMob(e.target.value)}
+					onChange={(e) => {
+						if (e.target.value.split('').length <= 10) {
+							setMob(e.target.value);
+						}
+					}}
 				/>
 				<TextField
 					label="Alternate Mobile Number"
@@ -346,7 +348,11 @@ const EmailBox = ({ setPop, arr, val }) => {
 						},
 					}}
 					value={amob}
-					onChange={(e) => setAmob(e.target.value)}
+					onChange={(e) => {
+						if (e.target.value.split('').length <= 10) {
+							setAmob(e.target.value);
+						}
+					}}
 				/>
 			</Box>
 			<Box
@@ -378,7 +384,7 @@ const EmailBox = ({ setPop, arr, val }) => {
 				justifyContent={'space-between'}
 				alignItems={'center'}
 				gap={2}
-				sx={{ '@media (max-width:800px)': { flexDirection: 'column' } }}
+				sx={{ '@media (max-width:800px)': { flexDirection: 'column' }, '@media (min-width:800px)': { marginTop: '1rem' } }}
 			>
 				<TextField
 					label="Aadhar Number"
@@ -411,7 +417,11 @@ const EmailBox = ({ setPop, arr, val }) => {
 						},
 					}}
 					value={adhNum}
-					onChange={(e) => setAdhNum(e.target.value)}
+					onChange={(e) => {
+						if (e.target.value.split('').length <= 12) {
+							setAdhNum(e.target.value);
+						}
+					}}
 				/>
 			</Box>
 			<TextField
@@ -598,7 +608,11 @@ const EmailBox = ({ setPop, arr, val }) => {
 								},
 							}}
 							value={refNum}
-							onChange={(e) => setRefNum(e.target.value)}
+							onChange={(e) => {
+								if (e.target.value.split('').length <= 10) {
+									setRefNum(e.target.value);
+								}
+							}}
 						/>
 					</Box>
 					<TextField
