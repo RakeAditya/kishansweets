@@ -25,9 +25,10 @@ const Carrier = () => {
 	}, []);
 	return (
 		<Layout>
-			<Box sx={{ minWidth: '350px' }}>
+			<Box sx={{ minWidth: '350px', border: '1px solid red' }}>
 				<div
 					style={{
+						minHeight: '70vh',
 						padding: '1.5em 0',
 						background: 'linear-gradient(-45deg, #e73c7e, #23d5ab)',
 						display: 'flex ',

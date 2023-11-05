@@ -6,6 +6,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import axios from 'axios';
 import avatar from './../../images/avatar.png';
+import dayjs from 'dayjs';
 const EmailBox = ({ setPop, arr, val }) => {
 	// const dummyDate = new Date();
 	// dummyDate.setFullYear(2020, 11, 1);
@@ -19,7 +20,7 @@ const EmailBox = ({ setPop, arr, val }) => {
 	const [mob, setMob] = React.useState('');
 	const [amob, setAmob] = React.useState('');
 	const [gender, setGender] = React.useState('');
-	const [selectedDate, setSelectedDate] = React.useState(null);
+	const [selectedDate, setSelectedDate] = React.useState(dayjs());
 	const [adhNum, setAdhNum] = React.useState('');
 	const [cadd, setCadd] = React.useState('');
 	const [refName, setRefName] = React.useState('');
@@ -52,7 +53,6 @@ const EmailBox = ({ setPop, arr, val }) => {
 			} else {
 				setErr({ ...err, errorName: '' });
 			}
-
 			if (!fname && !fname.length) {
 				setErr({ ...err, errorFname: "Father's Name must be alphabets only" });
 				return;
@@ -60,21 +60,21 @@ const EmailBox = ({ setPop, arr, val }) => {
 				setErr({ ...err, errorFname: '' });
 			}
 			// number validation
-			if (!mob && mob.length !== 10) {
-				setErr({ ...err, errorFname: 'Mobile Number should be of 10 digits only' });
+			if (mob.length < 10) {
+				setErr({ ...err, errorMob: 'Mobile Number should be of 10 digits only' });
 				return;
 			} else {
-				setErr({ ...err, errorFname: '' });
+				setErr({ ...err, errorMob: '' });
 			}
 			// adhaar validation
-			if (!adhNum && adhNum.length !== 10) {
+			if (adhNum.length < 12) {
 				setErr({ ...err, errorAdh: 'Aadhar number must be 12 digits only with no whitespaces' });
 				return;
 			} else {
 				setErr({ ...err, errorAdh: '' });
 			}
+			setErr({ ...err, errorMob: '', errorAdh: '', errorFname: '' });
 			const data = await handleImage();
-			console.log(data);
 			if (data.status === 200) {
 				const appno = data.data.appno;
 				const formData = new FormData();
@@ -98,7 +98,9 @@ const EmailBox = ({ setPop, arr, val }) => {
 				formData.append('exp_sal', sal);
 				formData.append('refmob', refNum);
 				formData.append('refadd', refAdd);
+				formData.forEach((ele) => console.log(ele));
 				const resp = await axios.post('https://kishansweets.com/apiweb/app_details.aspx', formData);
+				console.log(resp);
 				if (resp.data.status === 200) {
 					alert('form submitted');
 					setPop((pre) => !pre);
@@ -142,7 +144,7 @@ const EmailBox = ({ setPop, arr, val }) => {
 		<Box
 			width="min(1000px,100%)"
 			borderRadius={'25px'}
-			padding="2rem"
+			padding="1rem 2rem"
 			boxShadow="0 0 20px rgba(0,0,0,0.8)"
 			bgcolor="rgba(255,255,255,0.6)"
 			sx={{
@@ -151,16 +153,22 @@ const EmailBox = ({ setPop, arr, val }) => {
 				},
 			}}
 		>
+			{/* 1st row */}
 			<Box
 				display={'flex'}
 				justifyContent={'space-between'}
 				alignItems={'center'}
 				gap={2}
-				// border={'1px solid red'}
 				sx={{ '@media (max-width:800px)': { flexDirection: 'column-reverse' } }}
 			>
 				<Box flex={2} sx={{ '@media (max-width:800px)': { width: '100%' } }}>
-					<Typography variant="h5" fontWeight="600" letterSpacing="1px" sx={{ '@media (max-width: 800px)': { textAlign: 'center' } }}>
+					<Typography
+						variant="h5"
+						fontWeight="600"
+						letterSpacing="1px"
+						marginBottom={'2rem'}
+						sx={{ '@media (max-width: 800px)': { textAlign: 'center', marginBottom: '0' } }}
+					>
 						Opening for - <span style={{ fontSize: '1.7rem', fontWeight: '800' }}>{head}</span>
 					</Typography>
 					<TextField
@@ -168,14 +176,11 @@ const EmailBox = ({ setPop, arr, val }) => {
 						type="text"
 						variant="standard"
 						fullWidth
-						error={err.errorName && err.errorName.length ? true : false}
-						helperText={err.errorName}
 						required
 						sx={{
 							fontSize: '1.2rem',
 							fontWeight: '700',
 							letterSpacing: '1px',
-							marginTop: '1.5rem',
 							color: 'black',
 							'& .MuiInputBase-input': {
 								color: 'black',
@@ -196,6 +201,8 @@ const EmailBox = ({ setPop, arr, val }) => {
 								borderBottomColor: 'black',
 							},
 						}}
+						error={Boolean(err.errorName)}
+						helperText={err.errorName}
 						value={name}
 						onChange={(e) => setName(e.target.value)}
 					/>
@@ -205,14 +212,9 @@ const EmailBox = ({ setPop, arr, val }) => {
 						variant="standard"
 						fullWidth
 						required
-						error={err.errorFname && err.errorFname.length ? true : false}
-						helperText={err.errorFname}
 						sx={{
-							marginTop: '1rem',
+							marginY: '1rem',
 							color: 'black',
-							'@media (max-width:800px)': {
-								marginY: '0.5rem',
-							},
 							'& .MuiInputBase-input': {
 								color: 'black',
 							},
@@ -232,6 +234,8 @@ const EmailBox = ({ setPop, arr, val }) => {
 								borderBottomColor: 'black',
 							},
 						}}
+						error={Boolean(err.errorFname)}
+						helperText={err.errorFname}
 						value={fname}
 						onChange={(e) => setFname(e.target.value)}
 					/>
@@ -272,14 +276,13 @@ const EmailBox = ({ setPop, arr, val }) => {
 					</Box>
 				</Box>
 			</Box>
+			{/* 2nd row */}
 			<Box
-				// border={'1px solid red'}
-				// marginTop={'1em'}
 				display={'flex'}
+				gap={1}
 				justifyContent={'space-between'}
 				alignItems={'center'}
-				gap={1}
-				sx={{ '@media (max-width:800px)': { flexDirection: 'column' }, '@media (min-width:800px)': { marginTop: '1rem' } }}
+				sx={{ '@media (max-width:800px)': { flexDirection: 'column', gap: 0 } }}
 			>
 				<TextField
 					label="Mobile Number"
@@ -289,7 +292,7 @@ const EmailBox = ({ setPop, arr, val }) => {
 					required
 					sx={{
 						flex: 1,
-						// marginTop: '1em',
+
 						color: 'black',
 						'& .MuiInputBase-input': {
 							color: 'black',
@@ -316,17 +319,18 @@ const EmailBox = ({ setPop, arr, val }) => {
 							setMob(e.target.value);
 						}
 					}}
+					error={Boolean(err.errorMob)}
+					helperText={err.errorMob}
 				/>
 				<TextField
 					label="Alternate Mobile Number"
 					type="number"
 					variant="standard"
-					required
 					fullWidth
 					sx={{
 						// border: '1px solid red',
 						flex: 1,
-						marginTop: '0em',
+						marginY: '1rem',
 						color: 'black',
 						'& .MuiInputBase-input': {
 							color: 'black',
@@ -355,18 +359,18 @@ const EmailBox = ({ setPop, arr, val }) => {
 					}}
 				/>
 			</Box>
+			{/* 3rd row */}
 			<Box
-				marginTop={'1em'}
 				display={'flex'}
 				justifyContent={'space-between'}
 				alignItems={'flex-end'}
-				gap={2}
+				gap={1}
 				sx={{ '@media (max-width:800px)': { flexDirection: 'column' } }}
 			>
-				<FormControl variant="standard" fullWidth sx={{ flex: 1 }}>
+				<FormControl variant="standard" fullWidth sx={{ flex: 1, '@media (min-width:800px)': { marginRight: '0.5rem' } }}>
 					<LocalizationProvider dateAdapter={AdapterDayjs}>
 						<DemoContainer components={['DatePicker']}>
-							<DatePicker label="Date of Birth" format="DD/MM/YY" defaultValue={'22/12/20'} value={selectedDate} onChange={setSelectedDate} />
+							<DatePicker label="Date of Birth" format="DD/MM/YY" value={selectedDate} onChange={setSelectedDate} />
 						</DemoContainer>
 					</LocalizationProvider>
 				</FormControl>
@@ -379,13 +383,8 @@ const EmailBox = ({ setPop, arr, val }) => {
 					</Select>
 				</FormControl>
 			</Box>
-			<Box
-				display={'flex'}
-				justifyContent={'space-between'}
-				alignItems={'center'}
-				gap={2}
-				sx={{ '@media (max-width:800px)': { flexDirection: 'column' }, '@media (min-width:800px)': { marginTop: '1rem' } }}
-			>
+			{/* 4th row */}
+			<Box>
 				<TextField
 					label="Aadhar Number"
 					type="number"
@@ -396,6 +395,7 @@ const EmailBox = ({ setPop, arr, val }) => {
 					helperText={err.errorAdh}
 					sx={{
 						flex: 1,
+						marginY: '1rem',
 						color: 'black',
 						'& .MuiInputBase-input': {
 							color: 'black',
@@ -423,43 +423,44 @@ const EmailBox = ({ setPop, arr, val }) => {
 						}
 					}}
 				/>
-			</Box>
-			<TextField
-				label="Address"
-				type="text"
-				variant="standard"
-				fullWidth
-				required
-				sx={{
-					marginTop: '1em',
-					color: 'black',
-					'& .MuiInputBase-input': {
+				<TextField
+					label="Address"
+					type="text"
+					variant="standard"
+					fullWidth
+					required
+					sx={{
 						color: 'black',
-					},
-					'& .MuiInput-underline:after': {
-						borderBottomColor: 'black',
-					},
-					'& .MuiInputLabel-root': {
-						color: 'rgba(0,0,0,0.6)',
-						fontSize: '1.2rem',
-						fontWeight: '700',
-						letterSpacing: '1px',
-					},
-					'&:hover .MuiInput-underline:before': {
-						borderBottomColor: 'black',
-					},
-					'&:focus .MuiInput-underline:before': {
-						borderBottomColor: 'black',
-					},
-				}}
-				value={cadd}
-				onChange={(e) => setCadd(e.target.value)}
-			/>
+						'& .MuiInputBase-input': {
+							color: 'black',
+						},
+						'& .MuiInput-underline:after': {
+							borderBottomColor: 'black',
+						},
+						'& .MuiInputLabel-root': {
+							color: 'rgba(0,0,0,0.6)',
+							fontSize: '1.2rem',
+							fontWeight: '700',
+							letterSpacing: '1px',
+						},
+						'&:hover .MuiInput-underline:before': {
+							borderBottomColor: 'black',
+						},
+						'&:focus .MuiInput-underline:before': {
+							borderBottomColor: 'black',
+						},
+					}}
+					value={cadd}
+					onChange={(e) => setCadd(e.target.value)}
+				/>
+			</Box>
+			{/* 5th row */}
 			<Box
 				display={'flex'}
 				justifyContent={'space-between'}
+				marginTop={'1rem'}
 				gap={2}
-				sx={{ marginTop: '1em', '@media (max-width:800px)': { flexDirection: 'column' } }}
+				sx={{ '@media (max-width:800px)': { flexDirection: 'column' } }}
 			>
 				{/* shift change */}
 				<FormControl variant="standard" fullWidth sx={{ flex: 1 }}>
@@ -485,12 +486,14 @@ const EmailBox = ({ setPop, arr, val }) => {
 					</Select>
 				</FormControl>
 			</Box>
+			{/* 6th row */}
 			<Box
 				display={'flex'}
 				justifyContent={'space-between'}
 				alignItems={'center'}
 				gap={2}
-				sx={{ marginTop: '1em', '@media (max-width:800px)': { flexDirection: 'column' } }}
+				marginTop={'1rem'}
+				sx={{ '@media (max-width:800px)': { flexDirection: 'column' } }}
 			>
 				{/* shift change */}
 				<FormControl variant="standard" fullWidth sx={{ flex: 1 }}>
@@ -534,6 +537,7 @@ const EmailBox = ({ setPop, arr, val }) => {
 					/>
 				)}
 			</Box>
+			{/* another row */}
 			<Box width={'100%'} marginTop="1em" display={'flex'} alignItems={'center'} gap={2}>
 				<Typography sx={{ fontSize: '1.1rem', fontWeight: '600', letterSpacing: '1px', color: 'rgba(0,0,0,0.7)' }}>
 					Referred By someone : -
@@ -543,11 +547,10 @@ const EmailBox = ({ setPop, arr, val }) => {
 			{toggle && (
 				<>
 					<Box
+						gap={1}
 						display={'flex'}
 						justifyContent={'space-between'}
 						alignItems={'center'}
-						marginTop={'1em'}
-						gap={2}
 						sx={{ '@media (max-width:800px)': { flexDirection: 'column' }, transition: '1s ease-in' }}
 					>
 						<TextField
@@ -622,7 +625,7 @@ const EmailBox = ({ setPop, arr, val }) => {
 						fullWidth
 						sx={{
 							flex: 1,
-							marginTop: '1em',
+							marginTop: '1rem',
 							color: 'black',
 							'& .MuiInputBase-input': {
 								color: 'black',
@@ -648,14 +651,11 @@ const EmailBox = ({ setPop, arr, val }) => {
 					/>
 				</>
 			)}
-			{/* button box */}
+			{/* last row */}
 			<Box
 				display={'flex'}
-				// border={'1px solid red'}
 				justifyContent="space-evenly"
 				alignItems="center"
-				marginTop="2em"
-				// gap={1}
 				sx={{
 					'@media (max-width:720px)': {
 						flexDirection: 'column',
@@ -667,7 +667,6 @@ const EmailBox = ({ setPop, arr, val }) => {
 						padding: '8px 2rem',
 						margin: '1rem',
 						textTransform: 'capitalize',
-
 						fontSize: '1.2rem',
 						letterSpacing: '1px',
 						fontWeight: '700',
