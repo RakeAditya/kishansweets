@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.34ea673a.css",
-    "main.js": "/static/js/main.6d9f2acf.js",
+    "main.js": "/static/js/main.c8f2f025.js",
     "static/js/787.091bb736.chunk.js": "/static/js/787.091bb736.chunk.js",
     "static/media/image1.jpg": "/static/media/image1.f942e007a0712c7f8f98.jpg",
     "static/media/food5.jpg": "/static/media/food5.1799a7b4a3676ab2cac1.jpg",
@@ -11,13 +11,14 @@
     "static/media/food2.jpg": "/static/media/food2.4511b132440a57ff62ce.jpg",
     "static/media/KISHAN SWEETS -1.png": "/static/media/KISHAN SWEETS -1.88920ac9f9648924fee0.png",
     "static/media/kishanlogo.png": "/static/media/kishanlogo.2a2ebec5a0de169df37c.png",
+    "static/media/founder.jpg": "/static/media/founder.b5311ab0f4a68df72071.jpg",
     "index.html": "/index.html",
     "main.34ea673a.css.map": "/static/css/main.34ea673a.css.map",
-    "main.6d9f2acf.js.map": "/static/js/main.6d9f2acf.js.map",
+    "main.c8f2f025.js.map": "/static/js/main.c8f2f025.js.map",
     "787.091bb736.chunk.js.map": "/static/js/787.091bb736.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.34ea673a.css",
-    "static/js/main.6d9f2acf.js"
+    "static/js/main.c8f2f025.js"
   ]
 }

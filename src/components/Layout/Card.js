@@ -15,22 +15,22 @@ const Card = ({ post_name, pgender, exp, shft1, shft2, shft3, extra_req, setPop,
 			flexDirection="column"
 			alignItems="flex-start"
 		>
-			<Typography variant="h5" fontWeight="800" textTransform={'capitalize'} mb="10px" color="rgba(255,0,50,0.64)">
+			<Typography variant="h5" fontWeight="800" textTransform={'capitalize'} mb="10px" color="rgb(142,33,51)">
 				{post_name}
 			</Typography>
-			<Typography variant="h5" mb="10px" fontWeight="800">
+			<Typography variant="h6" mb="10px" fontWeight="800">
 				Gender : <span style={{ textTransform: 'capitalize', fontWeight: '500' }}>{pgender}</span>
 			</Typography>
-			<Typography variant="h5" mb="10px" fontWeight="800">
+			<Typography variant="h6" mb="10px" fontWeight="800">
 				Experience : <span style={{ textTransform: 'capitalize', fontWeight: '500' }}>{exp}</span>
 			</Typography>
-			<Typography variant="h5" mb="10px" fontWeight="800">
+			<Typography variant="h6" mb="10px" fontWeight="800">
 				Shift 1 : <span style={{ textTransform: 'capitalize', fontWeight: '500' }}>{shft1}</span>
 			</Typography>
-			<Typography variant="h5" mb="10px" fontWeight="800">
+			<Typography variant="h6" mb="10px" fontWeight="800">
 				Shift 2 : <span style={{ textTransform: 'capitalize', fontWeight: '500' }}>{shft2 ? `${shft2}` : 'NA'}</span>
 			</Typography>
-			<Typography variant="h5" mb="10px" fontWeight="800">
+			<Typography variant="h6" mb="10px" fontWeight="800">
 				Shift 3 : <span style={{ textTransform: 'capitalize', fontWeight: '500' }}>{shft3 ? `${shft3}` : 'NA'}</span>
 			</Typography>
 

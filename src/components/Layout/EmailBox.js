@@ -83,7 +83,6 @@ const EmailBox = ({ setPop, arr, val }) => {
 				formData.append('appno', appno);
 				formData.append('cname', name);
 				formData.append('fname', fname);
-				// 	// date selection
 				const dob = `${selectedDate.$D}/${selectedDate.$M + 1}/${selectedDate.$y}`;
 				formData.append('dob', dob);
 				formData.append('mob', mob);

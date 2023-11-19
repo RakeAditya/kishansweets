@@ -31,6 +31,10 @@ const Footer = () => {
 								'@media (max-width:1000px)': {
 									alignSelf: 'center',
 								},
+								'@media (max-width: 500px)': {
+									alignSelf: 'flex-start',
+									mx: '1rem',
+								},
 							}}
 						>
 							<span className="char">W</span>ord from our Chef
@@ -43,7 +47,7 @@ const Footer = () => {
 							sx={{
 								'@media (max-width:1000px)': {
 									marginX: '1rem',
-									textAlign: 'center',
+									textAlign: 'left',
 								},
 							}}
 							fontWeight={500}
@@ -53,9 +57,32 @@ const Footer = () => {
 						</Typography>
 					</Box>
 					{/* middle box */}
-					<Box flex={1} display="flex" flexDirection="column" alignItems={'flex-start'}>
-						<Typography variant="h5" alignSelf="center" color="white" fontWeight={800} marginBottom={'1rem'}>
-							Quick Links
+					<Box
+						flex={1}
+						display="flex"
+						flexDirection="column"
+						alignItems={'flex-start'}
+						justifyContent={'center'}
+						sx={{
+							'@media (max-width: 500px)': {
+								alignSelf: 'flex-start',
+								mx: '1rem',
+							},
+						}}
+					>
+						<Typography
+							variant="h5"
+							alignSelf="center"
+							color="white"
+							fontWeight={800}
+							marginBottom={'1rem'}
+							sx={{
+								'@media (max-width: 500px)': {
+									textAlign: 'start',
+								},
+							}}
+						>
+							<span className="char">Q</span>uick Links
 						</Typography>
 						<ul style={{ margin: '0 auto 1rem', listStyle: 'none', textTransform: 'capitalize' }}>
 							<li style={{ margin: ' 1rem 0' }}>
@@ -66,11 +93,33 @@ const Footer = () => {
 						</ul>
 					</Box>
 					{/* third box */}
-					<Box flex={1} gap="1" display="flex" flexDirection="column" alignItems="flex-start">
-						<Typography variant="h5" fontWeight={800} alignSelf="center" color="white">
-							Contact Info
+					<Box
+						flex={1}
+						gap="1"
+						display="flex"
+						flexDirection="column"
+						alignItems="flex-start"
+						sx={{
+							'@media (max-width: 500px)': {
+								alignSelf: 'flex-start',
+							},
+						}}
+					>
+						<Typography
+							variant="h5"
+							fontWeight={800}
+							alignSelf="center"
+							color="white"
+							sx={{
+								'@media (max-width: 500px)': {
+									alignSelf: 'flex-start',
+									mx: '1rem',
+								},
+							}}
+						>
+							<span className="char">C</span>ontact Info
 						</Typography>
-						<ul style={{ listStyle: 'none', margin: '0 2rem 1rem ' }}>
+						<ul style={{ listStyle: 'none', margin: '0 ' }}>
 							<li style={{ margin: ' 1rem 0', color: 'white', display: 'flex' }}>
 								<IconButton
 									sx={{
@@ -130,7 +179,20 @@ const Footer = () => {
 					</Box>
 				</Box>
 				{/* 4th box */}
-				<Box display="flex" marginTop="1rem" justifyContent="space-between" alignItems={'center'} gap={1}>
+				<Box
+					display="flex"
+					marginTop="1rem"
+					justifyContent="space-between"
+					alignItems={'center'}
+					gap={1}
+					sx={{
+						'@media (max-width: 500px)': {
+							flexDirection: 'column',
+							alignItems: 'flex-start',
+							mx: '1rem',
+						},
+					}}
+				>
 					<Typography
 						variant="body1"
 						color="white"

@@ -4,6 +4,7 @@ import { Box, Typography, Button } from '@mui/material';
 import Card from '../components/Layout/Card';
 import axios from 'axios';
 import EmailBox from '../components/Layout/EmailBox';
+import { MoonLoader } from 'react-spinners';
 const Carrier = () => {
 	const [cardData, setCardData] = React.useState(null);
 	const [pop, setPop] = React.useState(false);
@@ -25,20 +26,20 @@ const Carrier = () => {
 	}, []);
 	return (
 		<Layout>
-			<Box sx={{ minWidth: '350px', border: '1px solid red' }}>
+			<Box sx={{ minWidth: '350px' }}>
 				<div
 					style={{
 						minHeight: '70vh',
-						padding: '1.5em 0',
+						padding: ' 0',
 						background: 'linear-gradient(-45deg, #e73c7e, #23d5ab)',
 						display: 'flex ',
 						flexDirection: 'column',
-						justifyContent: 'center',
+						justifyContent: 'flex-start',
 						alignItems: 'center',
 					}}
 				>
 					{pop ? (
-						<Box>
+						<Box margin={' 2rem 0'}>
 							<EmailBox setPop={setPop} arr={cardData} val={val} />
 						</Box>
 					) : (
@@ -104,7 +105,7 @@ const Carrier = () => {
 									))}
 								</Box>
 							) : (
-								'Loading'
+								<MoonLoader color="rgba(0, 0, 0, 1)" />
 							)}
 							<Box margin="4rem 0" />
 						</>

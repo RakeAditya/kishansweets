@@ -1,7 +1,7 @@
 import React from 'react';
 import Layout from './../components/Layout/Layout';
 import { Box, Typography } from '@mui/material';
-// import back from '../images/kishan_backgroound.png';
+import photu from '../images/founder.jpg';
 const About = () => {
 	return (
 		<Layout>
@@ -10,7 +10,7 @@ const About = () => {
 					background: 'linear-gradient(-45deg, #e73c7e, #23d5ab)',
 					textAlign: 'center',
 					color: 'white',
-					minHeight: '73vh',
+					minHeight: '90vh',
 					padding: '3rem 0',
 					'& h4': {
 						fontWeight: 'bold',
@@ -43,23 +43,77 @@ const About = () => {
 				}}
 			>
 				<Typography variant="h4">Welcome To My Restaurant </Typography>
-				<p>
-					Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat quod, suscipit, aperiam totam autem culpa cum eveniet dolorum quasi est
-					perspiciatis laborum. Nam recusandae nihil quia odio voluptatibus facere omnis facilis rerum? Ab eum beatae nobis reiciendis, qui temporibus
-					aliquid, nesciunt velit sed quam recusandae necessitatibus, tempora maxime. Repellendus incidunt, maxime labore dolorum eos aperiam unde? At
-					veritatis nesciunt eos quas cupiditate blanditiis est quam maiores, amet, soluta exercitationem voluptatum, veniam assumenda? Ratione
-					perferendis officiis deserunt nostrum aspernatur sed asperiores! Earum sunt placeat ducimus sint, deleniti amet esse saepe voluptatem
-					commodi laudantium quibusdam repellat nobis libero at consectetur adipisci ipsa.
-				</p>
-				<br />
-				<p>
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, deserunt libero reprehenderit cum sint fugit cumque temporibus modi facere
-					eveniet amet obcaecati ducimus harum velit maxime vel qui voluptatibus quam odio corrupti saepe, voluptas dolorum quidem tempore? Esse
-					sapiente molestias minus enim quisquam dolorum eum culpa ullam impedit velit quo, corporis ducimus numquam dignissimos inventore maiores.
-					Nam deleniti itaque nostrum neque dolorum dolores, aliquam, voluptatum sapiente doloribus laborum perspiciatis ipsam, quo ut nisi distinctio
-					sunt nihil est blanditiis perferendis eveniet nesciunt! Nostrum, voluptatum eveniet repellat vel officia deleniti tempore voluptatibus
-					perferendis esse eaque temporibus porro? Aspernatur beatae deleniti illo autem!
-				</p>
+				<Box
+					display={'flex'}
+					mx={'1rem'}
+					sx={{
+						'@media (max-width: 1000px)': {
+							border: '1ps solid red',
+							flexDirection: 'column',
+							gap: '2',
+						},
+					}}
+				>
+					<Box flex={1} display={'flex'} alignItems={'center'} justifyContent={'center'} flexDirection={'column'}>
+						<Box
+							border={'1rem solid black'}
+							mb={'2rem'}
+							sx={{
+								height: '300px',
+								width: 'min(100%,400px)',
+							}}
+						>
+							<img src={photu} height={'100%'} width={'100%'} style={{ objectFit: 'cover' }} alt="" />
+						</Box>
+						<Box>
+							<Typography variant="h3" color={'black'}>
+								Founders Name
+							</Typography>
+							<Typography variant="h5" color={'black'}>
+								lorem asdasda absdmn sdmn asdadmn knasdn
+							</Typography>
+						</Box>
+					</Box>
+					<Box
+						flex={2}
+						sx={{
+							'@media (max-width: 1000px)': {
+								marginTop: '3rem',
+							},
+						}}
+					>
+						<p>
+							Kishan Sweets. was started by the initiative of Late Jagdish Prasad, founder and hotelier. We started our journey from Basti 1960 and
+							now we have grown our presence to various branches of restaurants across Basti. Location was the key in making our decisions and they
+							definitely paid off. Each location is a landmark destination in itself, thereby providing the much-needed impetus in terms of customer
+							visibility.
+						</p>
+						<br />
+						<p>
+							Kishan Sweets is based on a very simple mantra; “Most delicious Indian recipes that reflect the real taste and soul of Indian Food which
+							is served in a cheerful restaurant where food lovers can relax and eat with their fingers if they wish.” At Kishan Sweets we experiment
+							with the finest Indian spices and ingredients along with diverse cooking techniques to recreate traditional recipes, providing each
+							diner with an aromatic. visual and flavorful dining experience.
+						</p>
+						<br />
+						<p>
+							Our menu spans the breadth and depth of India, delivering the most delicious recipes that reflect the real taste and soul of Indian
+							food. Our signature dishes like Bati Chokha, Chaat Tikki, Dahi Bara, Idle and Dosa from our sharing plates and combos to the grills.
+						</p>
+						<br />
+						<p>Our curries are light and flavourful dishes like Ras-Bhari Kofta Curry, Kishan Sweets Special Dal Makhani.</p>
+						<br />
+						<p>
+							Our desserts are unique and innovative; rather than having the regular milk-based Indian desserts, we have created memorable desserts
+							like Gajar ka Halwa, Ras Malai, Baklawa, Hiramani, Kaju Barfi and Pista Roll.
+						</p>
+						<br />
+						<p>
+							We believe it’s not one man responsible for the success of the restaurant, it’s the whole team. We are a people company and the three
+							most important core values we follow at Kishan Sweets are Our People, Our Product, and Our Guest.
+						</p>
+					</Box>
+				</Box>
 			</Box>
 		</Layout>
 	);
