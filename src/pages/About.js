@@ -42,7 +42,7 @@ const About = () => {
 					},
 				}}
 			>
-				<Typography variant="h4">Welcome To My Restaurant </Typography>
+				<Typography variant="h4">About us </Typography>
 				<Box
 					display={'flex'}
 					mx={'1rem'}
@@ -60,17 +60,16 @@ const About = () => {
 							mb={'2rem'}
 							sx={{
 								height: '300px',
+								borderRadius: '15px',
+								boxShadow: '0 0 10px  black',
 								width: 'min(100%,400px)',
 							}}
 						>
 							<img src={photu} height={'100%'} width={'100%'} style={{ objectFit: 'cover' }} alt="" />
 						</Box>
 						<Box>
-							<Typography variant="h3" color={'black'}>
-								Founders Name
-							</Typography>
-							<Typography variant="h5" color={'black'}>
-								lorem asdasda absdmn sdmn asdadmn knasdn
+							<Typography variant="h4" color={'black'}>
+								Late Jagdish Prasad (Founder)
 							</Typography>
 						</Box>
 					</Box>
