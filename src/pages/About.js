@@ -56,7 +56,6 @@ const About = () => {
 				>
 					<Box flex={1} display={'flex'} alignItems={'center'} justifyContent={'center'} flexDirection={'column'}>
 						<Box
-							border={'1rem solid black'}
 							mb={'2rem'}
 							sx={{
 								height: '300px',
@@ -65,11 +64,15 @@ const About = () => {
 								width: 'min(100%,400px)',
 							}}
 						>
-							<img src={photu} height={'100%'} width={'100%'} style={{ objectFit: 'cover' }} alt="" />
+							<img src={photu} height={'100%'} width={'100%'} style={{ objectFit: 'cover', borderRadius: '15px' }} alt="" />
 						</Box>
 						<Box>
 							<Typography variant="h4" color={'black'}>
-								Late Jagdish Prasad (Founder)
+								Late Jagdish Prasad
+								<br />
+								<span style={{ fontSize: '2.5rem' }}>(Founder)</span>
+								<br />
+								<span style={{ fontSize: '2.5rem' }}>1960 - 2018</span>
 							</Typography>
 						</Box>
 					</Box>
@@ -82,10 +85,12 @@ const About = () => {
 						}}
 					>
 						<p>
-							Kishan Sweets. was started by the initiative of Late Jagdish Prasad, founder and hotelier. We started our journey from Basti 1960 and
-							now we have grown our presence to various branches of restaurants across Basti. Location was the key in making our decisions and they
-							definitely paid off. Each location is a landmark destination in itself, thereby providing the much-needed impetus in terms of customer
-							visibility.
+							Kishan Sweets. was started by the initiative of Late Jagdish Prasad, founder and hotelier. We started our journey from Basti in 1960 and
+							now we have grown our presence to various branches of restaurants across Basti namely Bhartiya Sweets at Gandhinagar, Bhartiya Sweets at
+							Katra, Bhartiya sweets at Companybaag, Kishan Sweets, Near District Hospital Basti. We are also now into new and suceesfull ventures
+							such as JP Restaurent and Banquet Hall, Station Road, Basti, JP Kishan Traders, and also in Health sector having Jp Bhartita Pharmacy at
+							Rauta Chauraha, Basti. These Locations were the key in making our decisions and they definitely paid off. Each location is a landmark
+							destination in itself, thereby providing the much-needed impetus in terms of customer visibility.
 						</p>
 						<br />
 						<p>
@@ -104,7 +109,8 @@ const About = () => {
 						<br />
 						<p>
 							Our desserts are unique and innovative; rather than having the regular milk-based Indian desserts, we have created memorable desserts
-							like Gajar ka Halwa, Ras Malai, Baklawa, Hiramani, Kaju Barfi and Pista Roll.
+							like Gajar ka Halwa, and Ras Malai. We believe it’s not one man responsible for the success of the restaurant, it’s the whole team. We
+							are a people company and the three most important core values we follow at Kishan Sweets are Our People, Our Product, and Our Guest.
 						</p>
 						<br />
 						<p>

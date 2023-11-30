@@ -10,7 +10,7 @@ import dayjs from 'dayjs';
 const EmailBox = ({ setPop, arr, val }) => {
 	// const dummyDate = new Date();
 	// dummyDate.setFullYear(2020, 11, 1);
-
+	const [btnLoad, setBtnLoad] = React.useState(false);
 	const head = arr[val - 1].post_name;
 	const imageRef = React.useRef(null);
 	const avatar64 = avatar.slice(22);
@@ -45,6 +45,7 @@ const EmailBox = ({ setPop, arr, val }) => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
+			setBtnLoad(true);
 			console.log('insode other api');
 			// validation section
 			if (!name && !name.length) {
@@ -107,6 +108,8 @@ const EmailBox = ({ setPop, arr, val }) => {
 			}
 		} catch (error) {
 			if (error) throw error;
+		} finally {
+			setBtnLoad(false);
 		}
 	};
 	const handleImage = async () => {
@@ -662,6 +665,7 @@ const EmailBox = ({ setPop, arr, val }) => {
 				}}
 			>
 				<Button
+					disabled={btnLoad}
 					sx={{
 						padding: '8px 2rem',
 						margin: '1rem',
