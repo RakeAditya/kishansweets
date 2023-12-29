@@ -136,7 +136,7 @@ const Footer = () => {
 								>
 									<PinDropTwoTone />
 								</IconButton>
-								<Typography>Kishan Sweets, Near District Hospital, Chiyabari Road, Basti</Typography>
+								<Typography>Kishan Sweets & Restaurant, Near District Hospital, Chiyabari Road, Basti</Typography>
 							</li>
 							<li style={{ margin: ' 1rem 0', color: 'white', display: 'flex' }}>
 								<IconButton

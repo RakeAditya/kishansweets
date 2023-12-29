@@ -7,7 +7,8 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import axios from 'axios';
 import avatar from './../../images/avatar.png';
 import dayjs from 'dayjs';
-const EmailBox = ({ setPop, arr, val }) => {
+import 'react-toastify/dist/ReactToastify.css';
+const EmailBox = ({ setPop, arr, val, func }) => {
 	// const dummyDate = new Date();
 	// dummyDate.setFullYear(2020, 11, 1);
 	const [btnLoad, setBtnLoad] = React.useState(false);
@@ -40,13 +41,13 @@ const EmailBox = ({ setPop, arr, val }) => {
 		errorMob: '',
 		errorAdh: '',
 	});
+
 	// submit FOrm
 	// start image
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
 			setBtnLoad(true);
-			console.log('insode other api');
 			// validation section
 			if (!name && !name.length) {
 				setErr({ ...err, errorName: 'Name must be alphabets only ' });
@@ -98,12 +99,10 @@ const EmailBox = ({ setPop, arr, val }) => {
 				formData.append('exp_sal', sal);
 				formData.append('refmob', refNum);
 				formData.append('refadd', refAdd);
-				formData.forEach((ele) => console.log(ele));
 				const resp = await axios.post('https://kishansweets.com/apiweb/app_details.aspx', formData);
-				console.log(resp);
 				if (resp.data.status === 200) {
-					alert('form submitted');
 					setPop((pre) => !pre);
+					func((pre) => !pre);
 				}
 			}
 		} catch (error) {
@@ -169,9 +168,10 @@ const EmailBox = ({ setPop, arr, val }) => {
 						fontWeight="600"
 						letterSpacing="1px"
 						marginBottom={'2rem'}
+						color="rgb(142,33,51)"
 						sx={{ '@media (max-width: 800px)': { textAlign: 'center', marginBottom: '0' } }}
 					>
-						Opening for - <span style={{ fontSize: '1.7rem', fontWeight: '800' }}>{head}</span>
+						Vacancy for - <span style={{ fontSize: '1.5rem', fontWeight: '800' }}>{head}</span>
 					</Typography>
 					<TextField
 						label="Full Name"
@@ -248,7 +248,7 @@ const EmailBox = ({ setPop, arr, val }) => {
 						width={'170px'}
 						height={'190px'}
 						border="1px solid black"
-						borderRadius="25px"
+						borderRadius="15px"
 						bgcolor="rgba(0,0,0,0.5)"
 						display="flex"
 						justifyContent={'center'}
@@ -372,7 +372,7 @@ const EmailBox = ({ setPop, arr, val }) => {
 				<FormControl variant="standard" fullWidth sx={{ flex: 1, '@media (min-width:800px)': { marginRight: '0.5rem' } }}>
 					<LocalizationProvider dateAdapter={AdapterDayjs}>
 						<DemoContainer components={['DatePicker']}>
-							<DatePicker label="Date of Birth" format="DD/MM/YY" value={selectedDate} onChange={setSelectedDate} />
+							<DatePicker label="Date of Birth" format="DD/MM/YYYY" value={selectedDate} onChange={setSelectedDate} />
 						</DemoContainer>
 					</LocalizationProvider>
 				</FormControl>
@@ -511,7 +511,7 @@ const EmailBox = ({ setPop, arr, val }) => {
 				{/* Expected Salary */}
 				{head !== 'Milk Man' && (
 					<TextField
-						label="Expected Salary"
+						label="Expected Salary (Monthly)"
 						type="number"
 						variant="standard"
 						fullWidth
@@ -573,7 +573,7 @@ const EmailBox = ({ setPop, arr, val }) => {
 									fontSize: '1.2rem',
 									fontWeight: '600',
 									letterSpacing: '1px',
-									color: 'rgba(0,0,0,0.7)',
+									color: 'rgba(0,0,0,0.6)',
 								},
 								'&:hover .MuiInput-underline:before': {
 									borderBottomColor: 'black',
@@ -603,7 +603,7 @@ const EmailBox = ({ setPop, arr, val }) => {
 									fontSize: '1.2rem',
 									fontWeight: '600',
 									letterSpacing: '1px',
-									color: 'rgba(0,0,0,0.7)',
+									color: 'rgba(0,0,0,0.6)',
 								},
 								'&:hover .MuiInput-underline:before': {
 									borderBottomColor: 'black',
@@ -636,10 +636,10 @@ const EmailBox = ({ setPop, arr, val }) => {
 								borderBottomColor: 'black',
 							},
 							'& .MuiInputLabel-root': {
+								color: 'rgba(0,0,0,0.6)',
 								fontSize: '1.2rem',
 								fontWeight: '600',
 								letterSpacing: '1px',
-								color: 'rgba(0,0,0,0.7)',
 							},
 							'&:hover .MuiInput-underline:before': {
 								borderBottomColor: 'black',
@@ -703,7 +703,9 @@ const EmailBox = ({ setPop, arr, val }) => {
 							bgcolor: 'rgba(0,0,0,0.6)',
 						},
 					}}
-					onClick={() => setPop((pre) => !pre)}
+					onClick={() => {
+						setPop((pre) => !pre);
+					}}
 				>
 					Go Back
 				</Button>

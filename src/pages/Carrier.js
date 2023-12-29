@@ -5,10 +5,12 @@ import Card from '../components/Layout/Card';
 import axios from 'axios';
 import EmailBox from '../components/Layout/EmailBox';
 import { MoonLoader } from 'react-spinners';
+import MessageBox from '../components/Layout/MessageBox';
 const Carrier = () => {
 	const [cardData, setCardData] = React.useState(null);
 	const [pop, setPop] = React.useState(false);
 	const [val, setVal] = React.useState(-1);
+	const [msg, setMsg] = React.useState(false);
 	React.useEffect(() => {
 		const getCardData = async () => {
 			try {
@@ -38,9 +40,10 @@ const Carrier = () => {
 						alignItems: 'center',
 					}}
 				>
+					{msg && <MessageBox func={setMsg} />}
 					{pop ? (
 						<Box margin={' 2rem 0'}>
-							<EmailBox setPop={setPop} arr={cardData} val={val} />
+							<EmailBox setPop={setPop} arr={cardData} val={val} func={setMsg} />
 						</Box>
 					) : (
 						<>
