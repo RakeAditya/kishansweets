@@ -42,7 +42,7 @@ const EmailBox = ({ setPop, arr, val, func }) => {
 		errorAdh: '',
 	});
 
-	// submit FOrm
+	// submit Form
 	// start image
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -76,8 +76,11 @@ const EmailBox = ({ setPop, arr, val, func }) => {
 				setErr({ ...err, errorAdh: '' });
 			}
 			setErr({ ...err, errorMob: '', errorAdh: '', errorFname: '' });
+			console.log('first api ');
 			const data = await handleImage();
+			console.log(data.data.appno);
 			if (data.status === 200) {
+				console.log('inside main api');
 				const appno = data.data.appno;
 				const formData = new FormData();
 				formData.append('api', 'sdgfwp49f4923d3287slhgw');
@@ -85,7 +88,7 @@ const EmailBox = ({ setPop, arr, val, func }) => {
 				formData.append('appno', appno);
 				formData.append('cname', name);
 				formData.append('fname', fname);
-				const dob = `${selectedDate.$D}/${selectedDate.$M + 1}/${selectedDate.$y}`;
+				const dob = `${selectedDate.$D}/${(selectedDate.$M + 1).toString().padStart(2, '0')}/${selectedDate.$y}`;
 				formData.append('dob', dob);
 				formData.append('mob', mob);
 				formData.append('alt_mob', amob);
@@ -98,7 +101,7 @@ const EmailBox = ({ setPop, arr, val, func }) => {
 				formData.append('quali', qual);
 				formData.append('exp_sal', sal);
 				formData.append('refmob', refNum);
-				formData.append('refadd', refAdd);
+				formData.append('refadd', refAdd)
 				const resp = await axios.post('https://kishansweets.com/apiweb/app_details.aspx', formData);
 				if (resp.data.status === 200) {
 					setPop((pre) => !pre);
@@ -124,6 +127,7 @@ const EmailBox = ({ setPop, arr, val, func }) => {
 				formData.append('img', img);
 				formData.append('sts', 'org');
 			}
+			
 			const resp = await axios.post('https://kishansweets.com/apiweb/upload_app_photo.aspx', formData);
 			// console.log(resp);
 			return resp;
@@ -136,7 +140,6 @@ const EmailBox = ({ setPop, arr, val, func }) => {
 		const reader = new FileReader();
 		reader.readAsDataURL(file);
 		reader.onload = () => {
-			console.log(reader);
 			setImage(reader.result);
 		};
 	};
