@@ -8,6 +8,7 @@ import Main from './pages/Main';
 import Pagenotfound from './pages/Pagenotfound';
 import Policy from './pages/Policy';
 import './App.css';
+import Status from './pages/Status';
 const Wrapper = ({ children }) => {
 	const location = useLocation();
 	React.useLayoutEffect(() => {
@@ -26,6 +27,7 @@ function App() {
 						<Route path="/contact" element={<Contact />} />
 						<Route path="/carrier" element={<Carrier />} />
 						<Route path="/policy" element={<Policy />} />
+						<Route path="/status" element={<Status />} />
 						<Route path="*" element={<Pagenotfound />} />
 					</Routes>
 				</Wrapper>

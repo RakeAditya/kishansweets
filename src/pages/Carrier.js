@@ -1,4 +1,6 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import 'react-toastify/dist/ReactToastify.css';
 import Layout from './../components/Layout/Layout';
 import { Box, Typography, Button } from '@mui/material';
 import Card from '../components/Layout/Card';
@@ -6,11 +8,18 @@ import axios from 'axios';
 import EmailBox from '../components/Layout/EmailBox';
 import { MoonLoader } from 'react-spinners';
 import MessageBox from '../components/Layout/MessageBox';
+import OtpBox from '../components/Layout/OtpBox';
 const Carrier = () => {
+	const navigate = useNavigate();
 	const [cardData, setCardData] = React.useState(null);
 	const [pop, setPop] = React.useState(false);
 	const [val, setVal] = React.useState(-1);
 	const [msg, setMsg] = React.useState(false);
+	const [otp, setOtp] = React.useState(true);
+	const [mainState, setMainState] = React.useState({
+		appno: '',
+		mob: '',
+	});
 	React.useEffect(() => {
 		const getCardData = async () => {
 			try {
@@ -42,9 +51,15 @@ const Carrier = () => {
 				>
 					{msg && <MessageBox func={setMsg} />}
 					{pop ? (
-						<Box margin={' 2rem 0'}>
-							<EmailBox setPop={setPop} arr={cardData} val={val} func={setMsg} />
-						</Box>
+						otp ? (
+							<Box margin={'2rem 0'}>
+								<OtpBox mainState={mainState} setMsg={setMsg} setPop={setPop} back={setOtp} />
+							</Box>
+						) : (
+							<Box margin={' 2rem 0'}>
+								<EmailBox arr={cardData} val={val} next={setOtp} setPop={setPop} setMainState={setMainState} />
+							</Box>
+						)
 					) : (
 						<>
 							<Box margin="2rem 0" width="100%" paddingX="2.5rem" display="flex" justifyContent="space-between" alignItems={'center'} flexWrap="wrap">
@@ -61,6 +76,9 @@ const Carrier = () => {
 										'&:hover': { color: 'white', bgcolor: 'rgba(0,0,0,0.6)' },
 										textTransform: 'none',
 										transition: '0.3s ease',
+									}}
+									onClick={() => {
+										navigate('/status');
 									}}
 								>
 									Application Status

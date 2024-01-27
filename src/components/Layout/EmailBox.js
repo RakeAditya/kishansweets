@@ -8,9 +8,7 @@ import axios from 'axios';
 import avatar from './../../images/avatar.png';
 import dayjs from 'dayjs';
 import 'react-toastify/dist/ReactToastify.css';
-const EmailBox = ({ setPop, arr, val, func }) => {
-	// const dummyDate = new Date();
-	// dummyDate.setFullYear(2020, 11, 1);
+const EmailBox = ({ setPop, arr, val, next, setMainState }) => {
 	const [btnLoad, setBtnLoad] = React.useState(false);
 	const head = arr[val - 1].post_name;
 	const imageRef = React.useRef(null);
@@ -101,11 +99,16 @@ const EmailBox = ({ setPop, arr, val, func }) => {
 				formData.append('quali', qual);
 				formData.append('exp_sal', sal);
 				formData.append('refmob', refNum);
-				formData.append('refadd', refAdd)
+				formData.append('refadd', refAdd);
 				const resp = await axios.post('https://kishansweets.com/apiweb/app_details.aspx', formData);
 				if (resp.data.status === 200) {
-					setPop((pre) => !pre);
-					func((pre) => !pre);
+					// set the page setting for otp page
+					const otpdata = new FormData();
+					otpdata.append(mob, mob);
+					const otp = await axios.post('https://kishansweets.com/apiweb/sendotp.aspx', otpdata);
+					console.log(otp.data);
+					setMainState({ appno, mob });
+					next((pre) => !pre);
 				}
 			}
 		} catch (error) {
@@ -127,7 +130,7 @@ const EmailBox = ({ setPop, arr, val, func }) => {
 				formData.append('img', img);
 				formData.append('sts', 'org');
 			}
-			
+
 			const resp = await axios.post('https://kishansweets.com/apiweb/upload_app_photo.aspx', formData);
 			// console.log(resp);
 			return resp;
@@ -194,7 +197,7 @@ const EmailBox = ({ setPop, arr, val, func }) => {
 								borderBottomColor: 'black',
 							},
 							'& .MuiInputLabel-root': {
-								color: 'rgba(0,0,0,0.6)',
+								color: 'rgba(0,0,200,0.6)',
 								fontSize: '1.2rem',
 								fontWeight: '700',
 								letterSpacing: '1px',
