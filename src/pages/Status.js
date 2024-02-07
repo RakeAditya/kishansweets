@@ -4,6 +4,7 @@ import { Box, TextField, InputLabel, Typography, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import StatusCard from '../components/Layout/StatusCard';
+import { toast } from 'react-toastify';
 const boxStyle = {
 	border: '0',
 	borderBottom: '1px solid black',
@@ -26,8 +27,6 @@ const Status = () => {
 	const [appData, setAppData] = React.useState({
 		mob: '',
 	});
-	// to save otp back data
-	const [otpData, setOtpData] = React.useState({});
 	// handle appno submit
 	const handleSubmit = async () => {
 		try {
@@ -35,9 +34,7 @@ const Status = () => {
 			formData.append('api', 'sdgfwp49f4923d3287slhgw');
 			formData.append('appno', appno);
 			const resp = await axios.post('https://kishansweets.com/apiweb/apps_genotp.aspx', formData);
-			// if true
-			setOtpData(resp.data);
-			console.log(resp.data);
+
 			setAppData({ mob: resp.data.mobno });
 			setPopOtp(true);
 		} catch (error) {
@@ -60,6 +57,8 @@ const Status = () => {
 				console.log(data.data.appsts[0]);
 				setCardData(data.data.appsts[0]);
 				setAppSts(true);
+			} else {
+				toast.error('Invalid Otp ,Please ref');
 			}
 		} catch (error) {
 			if (error) throw error;

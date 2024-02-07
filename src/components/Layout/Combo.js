@@ -1,7 +1,7 @@
-import { Box, TextField, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import React from 'react';
 
-const Combo = ({ heading, content }) => {
+const Combo = ({ heading, content, high }) => {
 	return (
 		<Box display={'flex'} gap={0} flexDirection={'column'} alignItems={'flex-start'} width={'100%'} margin={'1rem 0'}>
 			<Typography
@@ -14,7 +14,7 @@ const Combo = ({ heading, content }) => {
 					letterSpacing: '1px',
 					lineHeight: '0.5rem',
 					wordSpacing: '1px',
-					color: 'rgba(0,0,0,1)',
+					color: `${high ? 'rgb(143,33,52)' : 'rgba(0,0,0,0.6)'}`,
 					textTransform: 'capitalize',
 				}}
 			>
@@ -31,6 +31,7 @@ const Combo = ({ heading, content }) => {
 					wordSpacing: '2px',
 					textTransform: 'capitalize',
 					color: 'rgba(0,0,0,0.8)',
+					textAlign: 'left',
 				}}
 			>
 				{content ? content : ' NA'}

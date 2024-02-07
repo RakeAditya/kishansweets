@@ -82,7 +82,7 @@ const EmailBox = ({ setPop, arr, val, next, setMainState }) => {
 				const appno = data.data.appno;
 				const formData = new FormData();
 				formData.append('api', 'sdgfwp49f4923d3287slhgw');
-				formData.append('postid', val - 1);
+				formData.append('postid', val);
 				formData.append('appno', appno);
 				formData.append('cname', name);
 				formData.append('fname', fname);

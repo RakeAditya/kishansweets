@@ -28,7 +28,8 @@ const Carrier = () => {
 				const resp = await axios.post('https://kishansweets.com/apiweb/Vacancy.aspx', formData);
 				const data = resp.data;
 				setCardData(data.vacancylist);
-				console.log('rendereing');
+				console.log('rendereing card data');
+				console.log(data);
 			} catch (error) {
 				console.error(error.message);
 			}
