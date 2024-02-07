@@ -1,10 +1,9 @@
 import React from 'react';
 import { Box, Button, TextField, Typography } from '@mui/material';
 import axios from 'axios';
-
+import { toast } from 'react-toastify';
 const OtpBox = ({ mainState, setMsg, setPop, back }) => {
 	const [otp, setOtp] = React.useState('');
-	const [otpError, setOtpError] = React.useState(false);
 
 	const handleSubmit = async () => {
 		try {
@@ -16,13 +15,15 @@ const OtpBox = ({ mainState, setMsg, setPop, back }) => {
 			formData.append('otp', otp);
 			const resp = await axios.post('https://kishansweets.com/apiweb/verifyotp.aspx', formData);
 			console.log(resp.data);
-			if (resp.data.status === 200) {
-				setMsg((pre) => !pre);
-				setPop((pre) => !pre);
-				back((pre) => !pre);
+			if (resp.data.votp === 'Invalid OTP') {
+				toast.error('Invalid otp');
+				return;
 			}
+			setMsg((pre) => !pre);
+			setPop((pre) => !pre);
+			back((pre) => !pre);
 		} catch (error) {
-			if (error) console.log(error);
+			// if (error) console.log(error);
 		}
 	};
 	return (

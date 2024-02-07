@@ -15,7 +15,7 @@ const Carrier = () => {
 	const [pop, setPop] = React.useState(false);
 	const [val, setVal] = React.useState(-1);
 	const [msg, setMsg] = React.useState(false);
-	const [otp, setOtp] = React.useState(true);
+	const [otp, setOtp] = React.useState(false);
 	const [mainState, setMainState] = React.useState({
 		appno: '',
 		mob: '',

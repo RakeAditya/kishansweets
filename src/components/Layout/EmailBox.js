@@ -86,7 +86,7 @@ const EmailBox = ({ setPop, arr, val, next, setMainState }) => {
 				formData.append('appno', appno);
 				formData.append('cname', name);
 				formData.append('fname', fname);
-				const dob = `${selectedDate.$D}/${(selectedDate.$M + 1).toString().padStart(2, '0')}/${selectedDate.$y}`;
+				const dob = `${(selectedDate.$D + 1).toString().padStart(2, '0')}/${(selectedDate.$M + 1).toString().padStart(2, '0')}/${selectedDate.$y}`;
 				formData.append('dob', dob);
 				formData.append('mob', mob);
 				formData.append('alt_mob', amob);
@@ -104,7 +104,8 @@ const EmailBox = ({ setPop, arr, val, next, setMainState }) => {
 				if (resp.data.status === 200) {
 					// set the page setting for otp page
 					const otpdata = new FormData();
-					otpdata.append(mob, mob);
+					otpdata.append('mob', mob);
+					console.log(mob);
 					const otp = await axios.post('https://kishansweets.com/apiweb/sendotp.aspx', otpdata);
 					console.log(otp.data);
 					setMainState({ appno, mob });
@@ -489,7 +490,7 @@ const EmailBox = ({ setPop, arr, val, next, setMainState }) => {
 						<MenuItem value={1}>1 years</MenuItem>
 						<MenuItem value={2}>2 years</MenuItem>
 						<MenuItem value={3}>3 years</MenuItem>
-						<MenuItem value={4}> years</MenuItem>
+						<MenuItem value={4}>4 years</MenuItem>
 						<MenuItem value={5}>5 years</MenuItem>
 					</Select>
 				</FormControl>

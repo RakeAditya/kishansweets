@@ -9,6 +9,9 @@ import Pagenotfound from './pages/Pagenotfound';
 import Policy from './pages/Policy';
 import './App.css';
 import Status from './pages/Status';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Wrapper = ({ children }) => {
 	const location = useLocation();
 	React.useLayoutEffect(() => {
@@ -19,6 +22,20 @@ const Wrapper = ({ children }) => {
 function App() {
 	return (
 		<div className="app">
+			<ToastContainer
+				position="top-right"
+				autoClose={5000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+				theme="colored"
+				transition={'Bounce'}
+			/>
+
 			<HashRouter>
 				<Wrapper>
 					<Routes>
