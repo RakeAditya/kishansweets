@@ -14,7 +14,10 @@ const Carrier = () => {
 	const [cardData, setCardData] = React.useState(null);
 	const [pop, setPop] = React.useState(false);
 	const [val, setVal] = React.useState(-1);
+	// message box properties
 	const [msg, setMsg] = React.useState(false);
+	const [msgText, setMsgText] = React.useState('');
+	const [msgColor, setMsgColor] = React.useState('');
 	const [otp, setOtp] = React.useState(false);
 	const [mainState, setMainState] = React.useState({
 		appno: '',
@@ -50,11 +53,11 @@ const Carrier = () => {
 						alignItems: 'center',
 					}}
 				>
-					{msg && <MessageBox func={setMsg} />}
+					{msg && <MessageBox func={setMsg} textMessage={msgText} textColor={msgColor} />}
 					{pop ? (
 						otp ? (
 							<Box margin={'2rem 0'}>
-								<OtpBox mainState={mainState} setMsg={setMsg} setPop={setPop} back={setOtp} />
+								<OtpBox mainState={mainState} setMsg={setMsg} setPop={setPop} back={setOtp} setMsgText={setMsgText} setMsgColor={setMsgColor} />
 							</Box>
 						) : (
 							<Box margin={' 2rem 0'}>

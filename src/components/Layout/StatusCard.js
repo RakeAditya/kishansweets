@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Typography, Button } from '@mui/material';
 import Combo from './Combo';
+import { useNavigate } from 'react-router-dom';
 const StatusCard = ({
 	post_name,
 	cname,
@@ -21,6 +22,7 @@ const StatusCard = ({
 	ref_add,
 	app_sts,
 }) => {
+	const navigate = useNavigate();
 	const printRef = React.useRef(null);
 	const handlePrint = () => {
 		const printElement = printRef.current;
@@ -55,6 +57,7 @@ const StatusCard = ({
 		} else {
 			console.error('Element with ref "printRef" not found.');
 		}
+		navigate('/carrier');
 	};
 	return (
 		<Box margin={'1rem auto'} minWidth={'350px'} border={'1px solid white'} width={'min(1000px,90%)'} bgcolor={'white'}>
@@ -225,8 +228,8 @@ const StatusCard = ({
 					display={'flex'}
 					alignItems={'center'}
 					sx={{
+						flexDirection: 'column',
 						'@media(max-width: 650px)': {
-							flexDirection: 'column',
 							justifyContent: 'flex-start',
 							alignItems: 'center',
 						},

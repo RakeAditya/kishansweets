@@ -1,8 +1,8 @@
 import React from 'react';
-import { Box, Button, TextField, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
+import OtpInput from 'react-otp-input';
 import axios from 'axios';
-import { toast } from 'react-toastify';
-const OtpBox = ({ mainState, setMsg, setPop, back }) => {
+const OtpBox = ({ mainState, setMsg, setPop, back, setMsgText, setMsgColor }) => {
 	const [otp, setOtp] = React.useState('');
 
 	const handleSubmit = async () => {
@@ -16,14 +16,18 @@ const OtpBox = ({ mainState, setMsg, setPop, back }) => {
 			const resp = await axios.post('https://kishansweets.com/apiweb/verifyotp.aspx', formData);
 			console.log(resp.data);
 			if (resp.data.votp === 'Invalid OTP') {
-				toast.error('Invalid otp');
+				setMsgText('Incorrect Otp');
+				setMsgColor('rgba(255,0,0,0.5)');
 				return;
 			}
-			setMsg((pre) => !pre);
+			setMsgText(`Application submitted successfully \n Application No : ${mainState.appno}`);
+			setMsgColor('rgba(0,255,0,0.5)');
 			setPop((pre) => !pre);
 			back((pre) => !pre);
 		} catch (error) {
 			// if (error) console.log(error);
+		} finally {
+			setMsg((pre) => !pre);
 		}
 	};
 	return (
@@ -45,44 +49,14 @@ const OtpBox = ({ mainState, setMsg, setPop, back }) => {
 				An Otp has been sent to your regsitered Mobile No{' '}
 			</Typography>
 			<Box display={'flex'} flexDirection={'column'} alignItems={'center'} gap={3} marginTop={'2rem'}>
-				<TextField
-					label=""
-					placeholder="XXXXXX"
-					type="number"
-					required
-					sx={{
-						flex: 1,
-						width: '18%',
-						textAlign: 'center',
-						color: 'black',
-						'& .MuiInputBase-input': {
-							color: 'black',
-						},
-						'& .MuiInput-underline:after': {
-							borderBottomColor: 'black',
-						},
-						'& .MuiInputLabel-root': {
-							color: 'rgba(0,0,0,0.6)',
-							fontSize: '1.2rem',
-							fontWeight: '700',
-							letterSpacing: '1px',
-						},
-						'&:hover .MuiInput-underline:before': {
-							borderBottomColor: 'black',
-						},
-						'&:focus .MuiInput-underline:before': {
-							borderBottomColor: 'black',
-						},
-						'@media(max-width : 600px)': {
-							width: '100%',
-						},
-					}}
+				<OtpInput
 					value={otp}
-					onChange={(e) => {
-						if (e.target.value.split('').length <= 6) {
-							setOtp(e.target.value);
-						}
-					}}
+					onChange={setOtp}
+					numInputs={4}
+					inputType="number"
+					renderSeparator={<span>-</span>}
+					renderInput={(props) => <input {...props} />}
+					inputStyle={{ fontSize: '1.5rem', borderRadius: '5px', margin: '1px 5px', padding: '2px 5px', width: '30px' }}
 				/>
 				<Button
 					sx={{

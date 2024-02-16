@@ -1,7 +1,8 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-const MessageBox = ({ func }) => {
+import CancelIcon from '@mui/icons-material/Cancel';
+const MessageBox = ({ func, textMessage, textColor }) => {
 	return (
 		<Box
 			position="fixed"
@@ -36,12 +37,18 @@ const MessageBox = ({ func }) => {
 					letterSpacing={'2px'}
 					fontWeight={600}
 					textAlign={'center'}
-					color={'rgba(0,255,0,0.5)'}
+					color={textColor}
 					display={'flex'}
 					justifyContent={'center'}
 					alignItems={'center'}
+					whiteSpace={'pre-wrap'}
 				>
-					<CheckCircleIcon sx={{ height: '2rem', width: '2rem' }} /> <span style={{ width: '10px' }}></span> Application Submitted Successfully
+					{textColor === 'rgba(255,0,0,0.5)' ? (
+						<CancelIcon sx={{ height: '2rem', width: '2rem' }} />
+					) : (
+						<CheckCircleIcon sx={{ height: '2rem', width: '2rem' }} />
+					)}
+					<span style={{ width: '10px' }}></span> {textMessage}
 				</Typography>
 			</Box>
 		</Box>

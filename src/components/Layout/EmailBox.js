@@ -198,7 +198,7 @@ const EmailBox = ({ setPop, arr, val, next, setMainState }) => {
 								borderBottomColor: 'black',
 							},
 							'& .MuiInputLabel-root': {
-								color: 'rgba(0,0,200,0.6)',
+								color: 'rgba(0,0,0,0.6)',
 								fontSize: '1.2rem',
 								fontWeight: '700',
 								letterSpacing: '1px',

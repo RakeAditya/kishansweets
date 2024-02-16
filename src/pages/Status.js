@@ -1,10 +1,11 @@
 import React from 'react';
 import Layout from '../components/Layout/Layout';
-import { Box, TextField, InputLabel, Typography, Button } from '@mui/material';
+import { Box, InputLabel, Typography, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import StatusCard from '../components/Layout/StatusCard';
-import { toast } from 'react-toastify';
+import MessageBox from '../components/Layout/MessageBox';
+import StatusOtp from './StatusOtp';
 const boxStyle = {
 	border: '0',
 	borderBottom: '1px solid black',
@@ -18,15 +19,21 @@ const boxStyle = {
 
 const Status = () => {
 	const navigate = useNavigate();
+	const [showFormBox, setShowFormBox] = React.useState(true);
 	const [appno, setAppno] = React.useState('');
 	const [otp, setOtp] = React.useState(0);
 	const [popOtp, setPopOtp] = React.useState(false);
+	const [otpText, setOtpText] = React.useState('');
 	const [cardData, setCardData] = React.useState({});
 	const [appSts, setAppSts] = React.useState(false);
 	// to save final cards data
 	const [appData, setAppData] = React.useState({
 		mob: '',
 	});
+	// message box features
+	const [msg, setMsg] = React.useState(false);
+	const [msgText, setMsgText] = React.useState('hello friend');
+	const [msgColor, setMsgColor] = React.useState('rgba(255,0,0,0.5)');
 	// handle appno submit
 	const handleSubmit = async () => {
 		try {
@@ -34,11 +41,19 @@ const Status = () => {
 			formData.append('api', 'sdgfwp49f4923d3287slhgw');
 			formData.append('appno', appno);
 			const resp = await axios.post('https://kishansweets.com/apiweb/apps_genotp.aspx', formData);
-
+			console.log(resp.data);
+			if (resp.data.vappotp === 'Invalid Application No.') {
+				setMsg(true);
+				setMsgText('Invalid Application Number');
+				setMsgColor('rgba(255,0,0,0.5)');
+				return;
+			}
 			setAppData({ mob: resp.data.mobno });
 			setPopOtp(true);
+			setShowFormBox(false);
+			setOtpText(resp.data.vappotp);
 		} catch (error) {
-			if (error) console.log(error);
+			if (error) console.log(error.message);
 		}
 	};
 	// handle otp verification
@@ -57,12 +72,22 @@ const Status = () => {
 				console.log(data.data.appsts[0]);
 				setCardData(data.data.appsts[0]);
 				setAppSts(true);
+				setPopOtp(false);
 			} else {
-				toast.error('Invalid Otp ,Please ref');
+				setMsg(true);
+				setMsgText(`Incorrect OTP \n please enter again`);
+				setMsgColor('rgba(255,0,0,0.5)');
+				return;
 			}
 		} catch (error) {
 			if (error) throw error;
 		}
+	};
+	const handleResend = () => {
+		handleSubmit();
+		setMsg(true);
+		setMsgText('A new otp has been sent to the registered mobile number');
+		setMsgColor('rgba(0,255,0,0.5)');
 	};
 	return (
 		<Layout>
@@ -104,179 +129,100 @@ const Status = () => {
 				}}
 			>
 				<Typography variant="h4">Check your Application Status here </Typography>
+				{msg && <MessageBox func={setMsg} textColor={msgColor} textMessage={msgText} />}
 				{/* form box */}
-				<Box
-					width={'min(800px,100%)'}
-					mx={'auto'}
-					borderRadius={'25px'}
-					padding=" 2rem"
-					boxShadow="0 0 20px rgba(0,0,0,0.8)"
-					bgcolor="rgba(255,255,255,0.6)"
-					sx={{
-						'@media (max-width : 400px)': {
-							padding: '2rem 0.5rem',
-						},
-					}}
-				>
-					<Box display={'flex'} justifyContent={'space-evenly'} alignItems={'center'} flexDirection={'column'} flexWrap={'wrap'} gap={3}>
-						<InputLabel>
-							<Typography variant="h5" color={'black'} fontWeight={'700'} letterSpacing={'1px'} lineHeight={'2rem'}>
-								Enter Application Number
-							</Typography>
-						</InputLabel>
-						<input
-							type="number"
-							name="appno"
-							style={{ ...boxStyle }}
-							value={appno}
-							onChange={(e) => {
-								setAppno(e.target.value);
-							}}
-						/>
-					</Box>
-					{/* button section */}
+				{showFormBox && (
 					<Box
-						display={'flex'}
-						justifyContent="space-evenly"
-						alignItems="center"
+						width={'min(800px,100%)'}
+						mx={'auto'}
+						borderRadius={'25px'}
+						padding=" 2rem"
+						boxShadow="0 0 20px rgba(0,0,0,0.8)"
+						bgcolor="rgba(255,255,255,0.6)"
 						sx={{
-							mt: '2rem',
-							'@media (max-width:720px)': {
-								flexDirection: 'column',
+							'@media (max-width : 400px)': {
+								padding: '2rem 0.5rem',
 							},
 						}}
 					>
-						<Button
-							sx={{
-								padding: '8px 2rem',
-								margin: '0 1rem',
-								textTransform: 'capitalize',
-								fontSize: '1.2rem',
-								letterSpacing: '1px',
-								fontWeight: '700',
-								cursor: 'pointer',
-								borderRadius: '10px',
-								color: 'rgba(0,0,255,0.8)',
-								transition: '0.3sec ease',
-								'&:hover': {
-									color: 'white',
-									bgcolor: 'rgba(0,0,0,0.6)',
-								},
-							}}
-							onClick={handleSubmit}
-						>
-							Submit
-						</Button>
-						<Button
-							sx={{
-								padding: '8px 2rem',
-								margin: '1rem',
-								textTransform: 'capitalize',
-								fontSize: '1.2rem',
-								letterSpacing: '1px',
-								fontWeight: '700',
-								cursor: 'pointer',
-								borderRadius: '10px',
-								color: 'rgba(0,0,255,0.8)',
-								transition: '0.3sec ease',
-								'&:hover': {
-									color: 'white',
-									bgcolor: 'rgba(0,0,0,0.6)',
-								},
-							}}
-							onClick={() => navigate('/carrier')}
-						>
-							Go Back
-						</Button>
-					</Box>
-				</Box>
-				{/* otp box */}
-				{appSts ? (
-					<StatusCard {...cardData} />
-				) : (
-					popOtp && (
-						<Box
-							marginY={'10vh'}
-							marginX={'auto'}
-							width="min(600px, 100%)"
-							borderRadius={'25px'}
-							padding="1rem 2rem"
-							boxShadow="0 0 20px rgba(0,0,0,0.8)"
-							bgcolor="rgba(255,255,255,0.6)"
-							sx={{
-								'@media (max-width : 400px)': {
-									padding: '2rem 0.5rem',
-								},
-							}}
-						>
-							<Typography variant="h5" color={'black'} textAlign={'center'} width={'80%'} mx={'auto'}>
-								An Otp has been sent to your regsitered Mobile No{' '}
-							</Typography>
-							<Box display={'flex'} flexDirection={'column'} alignItems={'center'} gap={3} marginTop={'2rem'}>
-								<TextField
-									label=""
-									placeholder="XXXXXX"
-									type="number"
-									required
-									sx={{
-										flex: 1,
-										width: '18%',
-										textAlign: 'center',
-										color: 'black',
-										'& .MuiInputBase-input': {
-											color: 'black',
-										},
-										'& .MuiInput-underline:after': {
-											borderBottomColor: 'black',
-										},
-										'& .MuiInputLabel-root': {
-											color: 'rgba(0,0,0,0.6)',
-											fontSize: '1.2rem',
-											fontWeight: '700',
-											letterSpacing: '1px',
-										},
-										'&:hover .MuiInput-underline:before': {
-											borderBottomColor: 'black',
-										},
-										'&:focus .MuiInput-underline:before': {
-											borderBottomColor: 'black',
-										},
-										'@media(max-width : 600px)': {
-											width: '100%',
-										},
-									}}
-									value={otp}
-									onChange={(e) => {
-										if (e.target.value.split('').length <= 6) {
-											setOtp(e.target.value);
-										}
-									}}
-								/>
-								<Button
-									sx={{
-										padding: '8px 2rem',
-										margin: '1rem',
-										textTransform: 'capitalize',
-										fontSize: '1.2rem',
-										letterSpacing: '1px',
-										fontWeight: '700',
-										cursor: 'pointer',
-										borderRadius: '10px',
-										color: 'rgba(0,0,255,0.8)',
-										transition: '0.3sec ease',
-										'&:hover': {
-											color: 'white',
-											bgcolor: 'rgba(0,0,0,0.6)',
-										},
-									}}
-									onClick={handleOtp}
-								>
-									Submit
-								</Button>
-							</Box>
+						<Box display={'flex'} justifyContent={'space-evenly'} alignItems={'center'} flexDirection={'column'} flexWrap={'wrap'} gap={3}>
+							<InputLabel>
+								<Typography variant="h5" color={'black'} fontWeight={'700'} letterSpacing={'1px'} lineHeight={'2rem'}>
+									Enter Application Number
+								</Typography>
+							</InputLabel>
+							<input
+								type="number"
+								name="appno"
+								style={{ ...boxStyle }}
+								value={appno}
+								onChange={(e) => {
+									setAppno(e.target.value);
+								}}
+							/>
 						</Box>
-					)
+						{/* button section */}
+						<Box
+							display={'flex'}
+							justifyContent="space-evenly"
+							alignItems="center"
+							sx={{
+								mt: '2rem',
+								'@media (max-width:720px)': {
+									flexDirection: 'column',
+								},
+							}}
+						>
+							<Button
+								sx={{
+									padding: '8px 2rem',
+									margin: '0 1rem',
+									textTransform: 'capitalize',
+									fontSize: '1.2rem',
+									letterSpacing: '1px',
+									fontWeight: '700',
+									cursor: 'pointer',
+									borderRadius: '10px',
+									color: 'rgba(0,0,255,0.8)',
+									transition: '0.3sec ease',
+									'&:hover': {
+										color: 'white',
+										bgcolor: 'rgba(0,0,0,0.6)',
+									},
+								}}
+								onClick={handleSubmit}
+							>
+								Submit
+							</Button>
+							<Button
+								sx={{
+									padding: '8px 2rem',
+									margin: '1rem',
+									textTransform: 'capitalize',
+									fontSize: '1.2rem',
+									letterSpacing: '1px',
+									fontWeight: '700',
+									cursor: 'pointer',
+									borderRadius: '10px',
+									color: 'rgba(0,0,255,0.8)',
+									transition: '0.3sec ease',
+									'&:hover': {
+										color: 'white',
+										bgcolor: 'rgba(0,0,0,0.6)',
+									},
+								}}
+								onClick={() => navigate('/carrier')}
+							>
+								Go Back
+							</Button>
+						</Box>
+					</Box>
 				)}
+
+				{/* otp box */}
+				{popOtp && <StatusOtp otp={otp} setOtp={setOtp} handleOtp={handleOtp} handleResend={handleResend} otpText={otpText} />}
+				{/* application status box */}
+				{appSts && <StatusCard {...cardData} />}
 			</Box>
 			{/* result box */}
 		</Layout>
