@@ -8,7 +8,7 @@ import axios from 'axios';
 import EmailBox from '../components/Layout/EmailBox';
 import { MoonLoader } from 'react-spinners';
 import MessageBox from '../components/Layout/MessageBox';
-import OtpBox from '../components/Layout/OtpBox';
+import StatusOtp from './StatusOtp';
 const Carrier = () => {
 	const navigate = useNavigate();
 	const [cardData, setCardData] = React.useState(null);
@@ -23,6 +23,8 @@ const Carrier = () => {
 		appno: '',
 		mob: '',
 	});
+	const [otpVal, setOtpVal] = React.useState();
+	const [otpText, setOtpText] = React.useState('');
 	React.useEffect(() => {
 		const getCardData = async () => {
 			try {
@@ -31,21 +33,56 @@ const Carrier = () => {
 				const resp = await axios.post('https://kishansweets.com/apiweb/Vacancy.aspx', formData);
 				const data = resp.data;
 				setCardData(data.vacancylist);
-				console.log('rendereing card data');
-				console.log(data);
 			} catch (error) {
 				console.error(error.message);
 			}
 		};
 		getCardData();
 	}, []);
+
+	const handleOtp = async () => {
+		try {
+			const formData = new FormData();
+			formData.append('api', 'sdgfwp49f4923d3287slhgw');
+			formData.append('appno', mainState.appno);
+			formData.append('mob', mainState.mob);
+			formData.append('otp', otpVal);
+			const resp = await axios.post('https://kishansweets.com/apiweb/verifyotp.aspx', formData);
+
+			if (resp.data.votp === 'Invalid OTP') {
+				setMsgText('Incorrect Otp');
+				setMsgColor('rgba(255,0,0,0.5)');
+				return;
+			}
+			setMsgText(`Application submitted successfully \n Application No : ${mainState.appno}`);
+			setMsgColor('rgba(0,255,0,0.5)');
+			setPop((pre) => !pre);
+			setOtp(false);
+		} catch (error) {
+		} finally {
+			setMsg((pre) => !pre);
+		}
+	};
+	const handleResend = () => {
+		sendOtp();
+		setMsg(true);
+		setMsgText('A new otp has been sent to the registered mobile number');
+		setMsgColor('rgba(0,255,0,0.5)');
+	};
+
+	const sendOtp = async () => {
+		try {
+			const otpdata = new FormData();
+			otpdata.append('mob', mainState.mob);
+			const otp = await axios.post('https://kishansweets.com/apiweb/sendotp.aspx', otpdata);
+		} catch (error) {}
+	};
 	return (
 		<Layout>
 			<Box sx={{ minWidth: '350px' }}>
 				<div
 					style={{
 						minHeight: '70vh',
-						padding: ' 0',
 						background: 'linear-gradient(-45deg, #e73c7e, #23d5ab)',
 						display: 'flex ',
 						flexDirection: 'column',
@@ -56,12 +93,12 @@ const Carrier = () => {
 					{msg && <MessageBox func={setMsg} textMessage={msgText} textColor={msgColor} />}
 					{pop ? (
 						otp ? (
-							<Box margin={'2rem 0'}>
-								<OtpBox mainState={mainState} setMsg={setMsg} setPop={setPop} back={setOtp} setMsgText={setMsgText} setMsgColor={setMsgColor} />
+							<Box margin={'2rem 0'} width={'100%'}>
+								<StatusOtp otp={otpVal} setOtp={setOtpVal} handleOtp={handleOtp} handleResend={handleResend} otpText={otpText} />
 							</Box>
 						) : (
 							<Box margin={' 2rem 0'}>
-								<EmailBox arr={cardData} val={val} next={setOtp} setPop={setPop} setMainState={setMainState} />
+								<EmailBox arr={cardData} val={val} next={setOtp} setPop={setPop} setMainState={setMainState} setOtpText={setOtpText} />
 							</Box>
 						)
 					) : (

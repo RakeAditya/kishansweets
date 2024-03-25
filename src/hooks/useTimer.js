@@ -1,8 +1,8 @@
 import React from 'react';
 
 const useTimer = () => {
-	const [seconds, setSeconds] = React.useState(59);
-	const [minutes, setMinutes] = React.useState(2);
+	const [seconds, setSeconds] = React.useState(10);
+	const [minutes, setMinutes] = React.useState(0);
 	const [reset, setReset] = React.useState(false);
 	const timer = React.useRef();
 	const stop = () => {

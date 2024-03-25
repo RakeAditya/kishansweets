@@ -3,10 +3,13 @@ import useTimer from '../hooks/useTimer';
 import { Box, Typography, Button, IconButton } from '@mui/material';
 import OtpInput from 'react-otp-input';
 import LockOpenOutlinedIcon from '@mui/icons-material/LockOpenOutlined';
+import CloseIcon from '@mui/icons-material/Close';
 const StatusOtp = ({ otp, setOtp, handleOtp, handleResend, otpText }) => {
 	const { seconds, minutes, reset } = useTimer();
 	return (
 		<Box
+			display={'flex'}
+			flexDirection={'column'}
 			marginY={'10vh'}
 			marginX={'auto'}
 			width="min(600px, 100%)"
@@ -20,17 +23,42 @@ const StatusOtp = ({ otp, setOtp, handleOtp, handleResend, otpText }) => {
 				},
 			}}
 		>
-			<IconButton>
-				<LockOpenOutlinedIcon
+			<IconButton disableRipple disableFocusRipple>
+				<CloseIcon
 					sx={{
+						justifySelf: 'flex-end',
 						padding: '5px',
-						fontSize: '2.5rem',
-						backgroundColor: 'rgba(180,33,51,0.8)',
+						fontSize: '1.5rem',
+						backgroundColor: 'rgba(0,10,20,0.8)',
 						color: 'white',
 						borderRadius: '50%',
+						transition: '0.3s ease-in',
+						'&:hover': {
+							fontSize: '1.8rem',
+							boxShadow: '0',
+						},
+						'&.MuiButtonBase-root:hover': {
+							bgcolor: 'transparent',
+						},
+						position: 'absolute',
+						right: '5px',
+						top: '5px',
 					}}
 				/>
 			</IconButton>
+			<Box display={'flex'} justifyContent={'center'}>
+				<IconButton disableRipple disableFocusRipple sx={{ cursor: 'default' }}>
+					<LockOpenOutlinedIcon
+						sx={{
+							padding: '5px',
+							fontSize: '2.5rem',
+							backgroundColor: 'rgba(180,33,51,0.8)',
+							color: 'white',
+							borderRadius: '50%',
+						}}
+					/>
+				</IconButton>
+			</Box>
 			<Typography variant="h5" color={'black'} textAlign={'center'} width={'80%'} mx={'auto'} fontWeight={600} my={2} fontSize={'2rem'}>
 				OTP Verification
 			</Typography>

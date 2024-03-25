@@ -41,7 +41,7 @@ const Status = () => {
 			formData.append('api', 'sdgfwp49f4923d3287slhgw');
 			formData.append('appno', appno);
 			const resp = await axios.post('https://kishansweets.com/apiweb/apps_genotp.aspx', formData);
-			console.log(resp.data);
+
 			if (resp.data.vappotp === 'Invalid Application No.') {
 				setMsg(true);
 				setMsgText('Invalid Application Number');
@@ -52,24 +52,21 @@ const Status = () => {
 			setPopOtp(true);
 			setShowFormBox(false);
 			setOtpText(resp.data.vappotp);
-		} catch (error) {
-			if (error) console.log(error.message);
-		}
+		} catch (error) {}
 	};
 	// handle otp verification
 	const handleOtp = async () => {
 		try {
-			console.log(appData);
 			const formData = new FormData();
 			formData.append('api', 'sdgfwp49f4923d3287slhgw');
 			formData.append('appno', appno);
 			formData.append('otp', otp);
 			formData.append('mob', appData.mob);
 			const resp = await axios.post('https://kishansweets.com/apiweb/verifyotp.aspx', formData);
-			console.log(resp.data);
+
 			if (resp.data.votp === 'Application Submitted Successfully') {
 				const data = await axios.post('https://kishansweets.com/apiweb/app_sts.aspx', formData);
-				console.log(data.data.appsts[0]);
+
 				setCardData(data.data.appsts[0]);
 				setAppSts(true);
 				setPopOtp(false);

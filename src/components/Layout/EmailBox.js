@@ -8,7 +8,7 @@ import axios from 'axios';
 import avatar from './../../images/avatar.png';
 import dayjs from 'dayjs';
 import 'react-toastify/dist/ReactToastify.css';
-const EmailBox = ({ setPop, arr, val, next, setMainState }) => {
+const EmailBox = ({ setPop, arr, val, next, setMainState, setOtpText }) => {
 	const [btnLoad, setBtnLoad] = React.useState(false);
 	const head = arr[val - 1].post_name;
 	const imageRef = React.useRef(null);
@@ -74,11 +74,9 @@ const EmailBox = ({ setPop, arr, val, next, setMainState }) => {
 				setErr({ ...err, errorAdh: '' });
 			}
 			setErr({ ...err, errorMob: '', errorAdh: '', errorFname: '' });
-			console.log('first api ');
+
 			const data = await handleImage();
-			console.log(data.data.appno);
 			if (data.status === 200) {
-				console.log('inside main api');
 				const appno = data.data.appno;
 				const formData = new FormData();
 				formData.append('api', 'sdgfwp49f4923d3287slhgw');
@@ -100,15 +98,16 @@ const EmailBox = ({ setPop, arr, val, next, setMainState }) => {
 				formData.append('exp_sal', sal);
 				formData.append('refmob', refNum);
 				formData.append('refadd', refAdd);
+
 				const resp = await axios.post('https://kishansweets.com/apiweb/app_details.aspx', formData);
 				if (resp.data.status === 200) {
 					// set the page setting for otp page
 					const otpdata = new FormData();
 					otpdata.append('mob', mob);
-					console.log(mob);
 					const otp = await axios.post('https://kishansweets.com/apiweb/sendotp.aspx', otpdata);
-					console.log(otp.data);
+
 					setMainState({ appno, mob });
+					setOtpText(`An OTP has been sent to the XXXXXX${mob.slice(5)}`);
 					next((pre) => !pre);
 				}
 			}
@@ -120,7 +119,6 @@ const EmailBox = ({ setPop, arr, val, next, setMainState }) => {
 	};
 	const handleImage = async () => {
 		try {
-			// console.log('inside image api', image);
 			const formData = new FormData();
 			formData.append('api', 'sdgfwp49f4923d3287slhgw');
 			if (image === '') {
@@ -131,9 +129,7 @@ const EmailBox = ({ setPop, arr, val, next, setMainState }) => {
 				formData.append('img', img);
 				formData.append('sts', 'org');
 			}
-
 			const resp = await axios.post('https://kishansweets.com/apiweb/upload_app_photo.aspx', formData);
-			// console.log(resp);
 			return resp;
 		} catch (error) {
 			if (error) return 500;
