@@ -2,10 +2,12 @@ import React from 'react';
 import useTimer from '../hooks/useTimer';
 import { Box, Typography, Button, IconButton } from '@mui/material';
 import OtpInput from 'react-otp-input';
+import { useNavigate } from 'react-router-dom';
 import LockOpenOutlinedIcon from '@mui/icons-material/LockOpenOutlined';
 import CloseIcon from '@mui/icons-material/Close';
 const StatusOtp = ({ otp, setOtp, handleOtp, handleResend, otpText }) => {
 	const { seconds, minutes, reset } = useTimer();
+	const navigate = useNavigate();
 	return (
 		<Box
 			display={'flex'}
@@ -23,7 +25,13 @@ const StatusOtp = ({ otp, setOtp, handleOtp, handleResend, otpText }) => {
 				},
 			}}
 		>
-			<IconButton disableRipple disableFocusRipple>
+			<IconButton
+				disableRipple
+				disableFocusRipple
+				onClick={() => {
+					navigate('/carrier');
+				}}
+			>
 				<CloseIcon
 					sx={{
 						justifySelf: 'flex-end',

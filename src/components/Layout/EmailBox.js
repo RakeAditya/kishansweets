@@ -104,10 +104,9 @@ const EmailBox = ({ setPop, arr, val, next, setMainState, setOtpText }) => {
 					// set the page setting for otp page
 					const otpdata = new FormData();
 					otpdata.append('mob', mob);
-					const otp = await axios.post('https://kishansweets.com/apiweb/sendotp.aspx', otpdata);
-
+					await axios.post('https://kishansweets.com/apiweb/sendotp.aspx', otpdata);
 					setMainState({ appno, mob });
-					setOtpText(`An OTP has been sent to the XXXXXX${mob.slice(5)}`);
+					setOtpText(`An OTP has been sent to the XXXXXX${mob.slice(6)}`);
 					next((pre) => !pre);
 				}
 			}

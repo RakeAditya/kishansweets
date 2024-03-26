@@ -26,7 +26,7 @@ const MessageBox = ({ func, textMessage, textColor }) => {
 					width: 'min(100%,800px)',
 					border: '1px solid black',
 					padding: '2rem 1rem',
-					backgroundColor: 'black',
+					backgroundColor: 'white',
 					borderRadius: '10px',
 				}}
 				// onClick={}

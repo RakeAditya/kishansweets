@@ -51,11 +51,11 @@ const Carrier = () => {
 
 			if (resp.data.votp === 'Invalid OTP') {
 				setMsgText('Incorrect Otp');
-				setMsgColor('rgba(255,0,0,0.5)');
+				setMsgColor('rgba(255,0,0,0.9)');
 				return;
 			}
 			setMsgText(`Application submitted successfully \n Application No : ${mainState.appno}`);
-			setMsgColor('rgba(0,255,0,0.5)');
+			setMsgColor('rgba(0,255,0,0.9)');
 			setPop((pre) => !pre);
 			setOtp(false);
 		} catch (error) {
@@ -74,7 +74,7 @@ const Carrier = () => {
 		try {
 			const otpdata = new FormData();
 			otpdata.append('mob', mainState.mob);
-			const otp = await axios.post('https://kishansweets.com/apiweb/sendotp.aspx', otpdata);
+			await axios.post('https://kishansweets.com/apiweb/sendotp.aspx', otpdata);
 		} catch (error) {}
 	};
 	return (
