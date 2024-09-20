@@ -58,6 +58,7 @@ const Card = ({ post_name, pgender, exp, shft1, shft2, shft3, extra_req, setPop,
 				onClick={() => {
 					setVal(keyId);
 					setPop((pre) => !pre);
+					window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 				}}
 			>
 				Apply Now
